@@ -66,11 +66,13 @@ export const PRODUCTS: Product[] = [
     collection: "Excellence Collection",
     price: "₹4,499",
     rating: 5,
-    image: "/images/bedsheets_category.jpg",
+    image: "/images/achtia_bedding_01.jpg",
     images: [
-      "/images/bedsheets_category.jpg",
-      "/images/hero_bedroom.jpg",
-      "/images/bedding_sets_category.jpg"
+      "/images/achtia_bedding_01.jpg",
+      "/images/achtia_bedding_02.jpg",
+      "/images/achtia_bedding_03.jpg",
+      "/images/achtia_bedding_04.jpg",
+      "/images/achtia_bedding_05.jpg"
     ],
     description: "Crafted from 100% long-staple Giza cotton with a luscious 400 thread count sateen weave, the Excellence Sheet offers an ultra-soft feel and a beautiful subtle sheen. Engineered for longevity and maximum breathability, this sheet set gets softer with every wash while remaining resistant to pilling and fading.",
     shortDescription: "400 TC long-staple sateen Giza cotton sheet set with elegant hemstitching.",
@@ -108,11 +110,13 @@ export const PRODUCTS: Product[] = [
     collection: "Italian Embroidery",
     price: "₹6,299",
     rating: 4.9,
-    image: "/images/bedding_sets_category.jpg",
+    image: "/images/achtia_bedding_06.jpg",
     images: [
-      "/images/bedding_sets_category.jpg",
-      "/images/bedsheets_category.jpg",
-      "/images/hero_bedroom.jpg"
+      "/images/achtia_bedding_06.jpg",
+      "/images/achtia_bedding_07.jpg",
+      "/images/achtia_bedding_08.jpg",
+      "/images/achtia_bedding_09.jpg",
+      "/images/achtia_bedding_10.jpg"
     ],
     description: "Inspired by classic Tuscan heritage, our Italian Embroidery collection features precision satin-stitch double borders embroidered on 600 thread count cotton percale. Crisp, cool, and exceptionally breathable, it offers the distinct luxury feel of a world-class boutique hotel room.",
     shortDescription: "600 TC Egyptian Cotton Percale Sheets with Italian double-border embroidery.",
@@ -148,10 +152,13 @@ export const PRODUCTS: Product[] = [
     collection: "Clay Craft",
     price: "₹2,999",
     rating: 4.8,
-    image: "/images/dohars_category.jpg",
+    image: "/images/achtia_bedding_11.jpg",
     images: [
-      "/images/dohars_category.jpg",
-      "/images/hero_bedroom.jpg"
+      "/images/achtia_bedding_11.jpg",
+      "/images/achtia_bedding_12.jpg",
+      "/images/achtia_bedding_13.jpg",
+      "/images/achtia_bedding_14.jpg",
+      "/images/achtia_bedding_15.jpg"
     ],
     description: "Designed using traditional hand-block printing techniques of Rajasthan, the Clay Craft Indigo Dohar features three layers of fine mulmul cotton. Sandwiching a soft cotton flannel layer inside, it provides the perfect breathable warmth for air-conditioned rooms.",
     shortDescription: "3-layer mulmul cotton Dohar featuring authentic organic indigo hand-block printing.",
@@ -186,10 +193,13 @@ export const PRODUCTS: Product[] = [
     collection: "Clouds",
     price: "₹5,499",
     rating: 5,
-    image: "/images/comforters_category.jpg",
+    image: "/images/achtia_bedding_16.jpg",
     images: [
-      "/images/comforters_category.jpg",
-      "/images/bedding_sets_category.jpg"
+      "/images/achtia_bedding_16.jpg",
+      "/images/achtia_bedding_17.jpg",
+      "/images/achtia_bedding_18.jpg",
+      "/images/achtia_bedding_19.jpg",
+      "/images/achtia_bedding_20.jpg"
     ],
     description: "Live up to the feeling of sleeping on a cloud. Filled with 350 GSM of premium hypoallergenic down-alternative microgel and encased in a 300 TC sateen cotton casing. Box-stitch quilting ensures that the filling is evenly distributed, eliminating cold spots for consistent warmth throughout the night.",
     shortDescription: "Hypoallergenic down-alternative comforter, 350 GSM with box-stitch quilting.",
@@ -223,10 +233,12 @@ export const PRODUCTS: Product[] = [
     collection: "Altra",
     price: "₹1,899",
     rating: 4.7,
-    image: "/images/blankets_category.jpg",
+    image: "/images/achtia_bedding_21.jpg",
     images: [
-      "/images/blankets_category.jpg",
-      "/images/hero_bedroom.jpg"
+      "/images/achtia_bedding_21.jpg",
+      "/images/achtia_bedding_22.jpg",
+      "/images/achtia_bedding_23.jpg",
+      "/images/achtia_bedding_24.jpg"
     ],
     description: "The Altra Luxury Fleece Blanket is designed to provide light, cozy warmth on chilly summer nights or under central air conditioning. Made from high-density, anti-pilling micro-fleece, it features a velvety texture that is incredibly soft to the touch.",
     shortDescription: "Ultra-soft micro-fleece AC blanket, lightweight and anti-pilling with velvet binding.",
@@ -260,11 +272,12 @@ export const PRODUCTS: Product[] = [
     collection: "Mughal",
     price: "₹12,499",
     rating: 5,
-    image: "/images/hero_bedroom.jpg",
+    image: "/images/achtia_bedding_25.jpg",
     images: [
-      "/images/hero_bedroom.jpg",
-      "/images/bedding_sets_category.jpg",
-      "/images/comforters_category.jpg"
+      "/images/achtia_bedding_25.jpg",
+      "/images/achtia_bedding_26.jpg",
+      "/images/achtia_bedding_27.jpg",
+      "/images/achtia_bedding_28.jpg"
     ],
     description: "Elevate your suite with the ultimate bedroom upgrade. The Royal Palace Bedding Set combines our iconic 600 thread count sheets, a premium box-stitched matching comforter, and coordinating pillow covers for an aesthetically curated luxury display of royalty.",
     shortDescription: "The ultimate 7-piece bedroom set, featuring 600 TC sheets and matching comforter.",

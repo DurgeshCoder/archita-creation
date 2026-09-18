@@ -1,90 +1,118 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ZoomIn, Sparkles, Filter } from "lucide-react";
+import { X, ZoomIn, Sparkles, Filter, Package } from "lucide-react";
 import SectionTitle from "./SectionTitle";
 
-interface GalleryItem {
+export interface GalleryItem {
   id: string;
   title: string;
   category: string;
   categoryKey: string;
   image: string;
-  aspectRatio: string;
+  aspectRatio?: string | null;
+  displayOrder?: number;
+  isActive?: boolean;
 }
 
-export default function MasonryGallery() {
+interface MasonryGalleryProps {
+  initialItems?: GalleryItem[];
+  showTitle?: boolean;
+}
+
+const DEFAULT_GALLERY_ITEMS: GalleryItem[] = [
+  {
+    id: "1",
+    title: "Presidential Bedroom Suite Decor",
+    category: "Master Bedroom",
+    categoryKey: "bedding-sets",
+    image: "/images/archita_bedding_01.jpg",
+    aspectRatio: "h-[320px] md:h-[400px]",
+  },
+  {
+    id: "2",
+    title: "Folded Excellence Cotton Sateen Weave",
+    category: "Bedsheets",
+    categoryKey: "bedsheets",
+    image: "/images/archita_bedding_07.jpg",
+    aspectRatio: "h-[250px] md:h-[300px]",
+  },
+  {
+    id: "3",
+    title: "Royal Palace Jacquard Detail",
+    category: "Bedding Sets",
+    categoryKey: "bedding-sets",
+    image: "/images/archita_bedding_12.jpg",
+    aspectRatio: "h-[350px] md:h-[450px]",
+  },
+  {
+    id: "4",
+    title: "Fluffy Down-Alternative Loft",
+    category: "Comforters",
+    categoryKey: "comforters",
+    image: "/images/archita_bedding_18.jpg",
+    aspectRatio: "h-[220px] md:h-[280px]",
+  },
+  {
+    id: "5",
+    title: "Traditional Floral Mulmul Dohar Print",
+    category: "Dohars",
+    categoryKey: "dohars",
+    image: "/images/archita_bedding_14.jpg",
+    aspectRatio: "h-[300px] md:h-[380px]",
+  },
+  {
+    id: "6",
+    title: "Anti-Pilling Coral Fleece Texture",
+    category: "AC Blankets",
+    categoryKey: "blankets",
+    image: "/images/archita_bedding_22.jpg",
+    aspectRatio: "h-[280px] md:h-[350px]",
+  },
+  {
+    id: "7",
+    title: "Italian Monogram Embroidered Percale",
+    category: "Bedsheets",
+    categoryKey: "bedsheets",
+    image: "/images/archita_bedding_06.jpg",
+    aspectRatio: "h-[320px] md:h-[380px]",
+  },
+  {
+    id: "8",
+    title: "Handcrafted Sanganeri Indigo Dohar",
+    category: "Dohars",
+    categoryKey: "dohars",
+    image: "/images/archita_bedding_08.jpg",
+    aspectRatio: "h-[260px] md:h-[320px]",
+  },
+];
+
+export default function MasonryGallery({
+  initialItems,
+  showTitle = true,
+}: MasonryGalleryProps) {
+  const [items, setItems] = useState<GalleryItem[]>(
+    initialItems && initialItems.length > 0 ? initialItems : DEFAULT_GALLERY_ITEMS
+  );
   const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
   const [activeFilter, setActiveFilter] = useState("all");
 
-  const galleryItems: GalleryItem[] = [
-    {
-      id: "1",
-      title: "Presidential Bedroom Suite Decor",
-      category: "Master Bedroom",
-      categoryKey: "bedding-sets",
-      image: "/images/archita_bedding_01.jpg",
-      aspectRatio: "h-[320px] md:h-[400px]",
-    },
-    {
-      id: "2",
-      title: "Folded Excellence Cotton Sateen Weave",
-      category: "Bedsheets",
-      categoryKey: "bedsheets",
-      image: "/images/archita_bedding_07.jpg",
-      aspectRatio: "h-[250px] md:h-[300px]",
-    },
-    {
-      id: "3",
-      title: "Royal Palace Jacquard Detail",
-      category: "Bedding Sets",
-      categoryKey: "bedding-sets",
-      image: "/images/archita_bedding_12.jpg",
-      aspectRatio: "h-[350px] md:h-[450px]",
-    },
-    {
-      id: "4",
-      title: "Fluffy Down-Alternative Loft",
-      category: "Comforters",
-      categoryKey: "comforters",
-      image: "/images/archita_bedding_18.jpg",
-      aspectRatio: "h-[220px] md:h-[280px]",
-    },
-    {
-      id: "5",
-      title: "Traditional Floral Mulmul Dohar Print",
-      category: "Dohars",
-      categoryKey: "dohars",
-      image: "/images/archita_bedding_14.jpg",
-      aspectRatio: "h-[300px] md:h-[380px]",
-    },
-    {
-      id: "6",
-      title: "Anti-Pilling Coral Fleece Texture",
-      category: "AC Blankets",
-      categoryKey: "blankets",
-      image: "/images/archita_bedding_22.jpg",
-      aspectRatio: "h-[280px] md:h-[350px]",
-    },
-    {
-      id: "7",
-      title: "Italian Monogram Embroidered Percale",
-      category: "Bedsheets",
-      categoryKey: "bedsheets",
-      image: "/images/archita_bedding_06.jpg",
-      aspectRatio: "h-[320px] md:h-[380px]",
-    },
-    {
-      id: "8",
-      title: "Handcrafted Sanganeri Indigo Dohar",
-      category: "Dohars",
-      categoryKey: "dohars",
-      image: "/images/archita_bedding_08.jpg",
-      aspectRatio: "h-[260px] md:h-[320px]",
-    },
-  ];
+  // Fetch dynamic gallery items from database
+  useEffect(() => {
+    fetch("/api/gallery")
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          const active = data.filter((item: any) => item.isActive !== false);
+          if (active.length > 0) {
+            setItems(active);
+          }
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   // Close on Escape key
   useEffect(() => {
@@ -95,80 +123,113 @@ export default function MasonryGallery() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  const filteredItems = galleryItems.filter(
-    (item) => activeFilter === "all" || item.categoryKey === activeFilter
-  );
+  // Compute dynamic filter tabs based on items
+  const filterTabs = useMemo(() => {
+    const categoryMap = new Map<string, string>();
+    categoryMap.set("all", "All Works");
 
-  const filterTabs = [
-    { key: "all", label: "All Works" },
-    { key: "bedsheets", label: "Bedsheets" },
-    { key: "comforters", label: "Comforters" },
-    { key: "blankets", label: "AC Blankets" },
-    { key: "dohars", label: "Dohars" },
-    { key: "bedding-sets", label: "Bedding Sets" },
-  ];
+    items.forEach((item) => {
+      if (item.categoryKey && item.category) {
+        if (!categoryMap.has(item.categoryKey)) {
+          categoryMap.set(item.categoryKey, item.category);
+        }
+      }
+    });
+
+    return Array.from(categoryMap.entries()).map(([key, label]) => ({
+      key,
+      label,
+    }));
+  }, [items]);
+
+  const filteredItems = useMemo(() => {
+    return items.filter(
+      (item) => activeFilter === "all" || item.categoryKey === activeFilter
+    );
+  }, [items, activeFilter]);
 
   return (
     <section className="py-24 bg-neutral-50/70 dark:bg-neutral-900/40">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <SectionTitle
-          title="Textile Design Gallery"
-          subtitle="Visual Craftsmanship"
-          description="Browse detailed snapshots of our luxury cotton weaves, stitch accuracy, plush loft, and traditional hand-block impressions."
-        />
+        {showTitle && (
+          <SectionTitle
+            title="Textile Design Gallery"
+            subtitle="Visual Craftsmanship"
+            description="Browse detailed snapshots of our luxury cotton weaves, stitch accuracy, plush loft, and traditional hand-block impressions."
+          />
+        )}
 
-        {/* Filter Bar */}
-        <div className="flex items-center justify-center gap-2 mb-12 flex-wrap">
-          {filterTabs.map((tab) => (
-            <button
-              key={tab.key}
-              onClick={() => setActiveFilter(tab.key)}
-              className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
-                activeFilter === tab.key
-                  ? "bg-secondary text-white shadow-sm"
-                  : "bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700 hover:border-secondary/50"
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
+        {/* Dynamic Filter Bar */}
+        {filterTabs.length > 1 && (
+          <div className="flex items-center justify-center gap-2 mb-12 flex-wrap">
+            {filterTabs.map((tab) => (
+              <button
+                key={tab.key}
+                onClick={() => setActiveFilter(tab.key)}
+                className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
+                  activeFilter === tab.key
+                    ? "bg-secondary text-white shadow-sm"
+                    : "bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700 hover:border-secondary/50"
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* Masonry Grid */}
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
-          {filteredItems.map((item) => (
-            <motion.div
-              key={item.id}
-              onClick={() => setSelectedItem(item)}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4 }}
-              className={`break-inside-avoid relative w-full ${item.aspectRatio} rounded-3xl overflow-hidden cursor-pointer group shadow-xs hover:shadow-xl transition-all duration-300 border border-neutral-200/60 dark:border-neutral-800`}
-            >
-              <Image
-                src={item.image}
-                alt={item.title}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6" />
-              
-              <div className="absolute inset-0 p-6 flex flex-col justify-end text-white opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-300">
-                <span className="text-[10px] tracking-widest uppercase font-bold text-secondary-light mb-1">
-                  {item.category}
-                </span>
-                <h3 className="font-serif text-base font-bold tracking-wide">
-                  {item.title}
-                </h3>
-                <div className="absolute top-5 right-5 w-9 h-9 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/20">
-                  <ZoomIn className="w-4 h-4 text-white" />
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        {filteredItems.length > 0 ? (
+          <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
+            {filteredItems.map((item, index) => {
+              const heightClass = item.aspectRatio || "h-[300px] md:h-[380px]";
+              const imgSrc = item.image || "/images/hero_bedroom.jpg";
+
+              return (
+                <motion.div
+                  key={item.id || index}
+                  onClick={() => setSelectedItem(item)}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: (index % 6) * 0.05 }}
+                  className={`break-inside-avoid relative w-full ${heightClass} rounded-3xl overflow-hidden cursor-pointer group shadow-xs hover:shadow-xl transition-all duration-300 border border-neutral-200/60 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900`}
+                >
+                  <Image
+                    src={imgSrc}
+                    alt={item.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6" />
+
+                  <div className="absolute inset-0 p-6 flex flex-col justify-end text-white opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-300">
+                    <span className="text-[10px] tracking-widest uppercase font-bold text-secondary-light mb-1">
+                      {item.category}
+                    </span>
+                    <h3 className="font-serif text-base font-bold tracking-wide">
+                      {item.title}
+                    </h3>
+                    <div className="absolute top-5 right-5 w-9 h-9 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/20">
+                      <ZoomIn className="w-4 h-4 text-white" />
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="text-center py-20 bg-white dark:bg-neutral-900 rounded-3xl border border-neutral-200 dark:border-neutral-800 p-8 max-w-md mx-auto">
+            <Package className="w-8 h-8 text-neutral-400 mx-auto mb-3" />
+            <p className="text-sm font-serif font-bold text-luxury-dark dark:text-luxury-light">
+              No Photos in this Category
+            </p>
+            <p className="text-xs text-neutral-400 mt-1">
+              Select another category filter or view &ldquo;All Works&rdquo;.
+            </p>
+          </div>
+        )}
       </div>
 
       {/* Lightbox Modal */}
@@ -183,7 +244,7 @@ export default function MasonryGallery() {
           >
             <button
               onClick={() => setSelectedItem(null)}
-              className="absolute top-6 right-6 p-3 rounded-full bg-white/10 hover:bg-white/25 text-white transition-colors border border-white/20"
+              className="absolute top-6 right-6 p-3 rounded-full bg-white/10 hover:bg-white/25 text-white transition-colors border border-white/20 cursor-pointer"
               aria-label="Close Lightbox"
             >
               <X className="w-5 h-5" />
@@ -198,7 +259,7 @@ export default function MasonryGallery() {
               onClick={(e) => e.stopPropagation()}
             >
               <Image
-                src={selectedItem.image}
+                src={selectedItem.image || "/images/hero_bedroom.jpg"}
                 alt={selectedItem.title}
                 fill
                 priority

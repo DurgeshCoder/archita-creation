@@ -7,16 +7,24 @@ import ThemeToggle from "./ThemeToggle";
 
 interface AdminHeaderProps {
   title: string;
+  subtitle?: string;
   description?: string;
   actionHref?: string;
   actionLabel?: string;
+  action?: {
+    label: string;
+    onClick?: () => void;
+    icon?: any;
+  };
 }
 
 export default function AdminHeader({
   title,
+  subtitle,
   description,
   actionHref,
   actionLabel,
+  action,
 }: AdminHeaderProps) {
   const [adminUser, setAdminUser] = useState<{ name: string; email: string } | null>(null);
 
@@ -31,14 +39,17 @@ export default function AdminHeader({
       .catch(() => {});
   }, []);
 
+  const descText = subtitle || description;
+  const ActionIcon = action?.icon || Plus;
+
   return (
     <header className="bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 px-8 py-4.5 sticky top-0 z-30 flex flex-col md:flex-row md:items-center md:justify-between gap-4 shadow-xs shrink-0">
       <div>
         <h1 className="font-serif text-2xl font-bold text-luxury-dark dark:text-luxury-light">
           {title}
         </h1>
-        {description && (
-          <p className="text-xs text-neutral-500 mt-0.5">{description}</p>
+        {descText && (
+          <p className="text-xs text-neutral-500 mt-0.5">{descText}</p>
         )}
       </div>
 
@@ -48,7 +59,17 @@ export default function AdminHeader({
 
         <div className="h-6 w-px bg-neutral-200 dark:bg-neutral-800" />
 
-        {actionHref && actionLabel && (
+        {action && (
+          <button
+            onClick={action.onClick}
+            className="flex items-center gap-2 px-4 py-2 bg-secondary hover:bg-secondary-dark text-white text-xs font-semibold rounded-xl shadow-sm shadow-secondary/30 transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+          >
+            <ActionIcon className="w-4 h-4" />
+            <span>{action.label}</span>
+          </button>
+        )}
+
+        {!action && actionHref && actionLabel && (
           <Link
             href={actionHref}
             className="flex items-center gap-2 px-4 py-2 bg-secondary hover:bg-secondary-dark text-white text-xs font-semibold rounded-xl shadow-sm shadow-secondary/30 transition-all hover:scale-[1.02] active:scale-[0.98]"

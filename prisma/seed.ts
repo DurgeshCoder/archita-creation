@@ -168,8 +168,89 @@ async function main() {
   }
   console.log(`✅ Seeded ${PRODUCTS.length} products`);
 
+  // 5. Seed Gallery Items
+  const defaultGallery = [
+    {
+      title: "Presidential Bedroom Suite Decor",
+      category: "Master Bedroom",
+      categoryKey: "bedding-sets",
+      image: "/images/archita_bedding_01.jpg",
+      aspectRatio: "h-[320px] md:h-[400px]",
+      displayOrder: 1,
+    },
+    {
+      title: "Folded Excellence Cotton Sateen Weave",
+      category: "Bedsheets",
+      categoryKey: "bedsheets",
+      image: "/images/archita_bedding_07.jpg",
+      aspectRatio: "h-[250px] md:h-[300px]",
+      displayOrder: 2,
+    },
+    {
+      title: "Royal Palace Jacquard Detail",
+      category: "Bedding Sets",
+      categoryKey: "bedding-sets",
+      image: "/images/archita_bedding_12.jpg",
+      aspectRatio: "h-[350px] md:h-[450px]",
+      displayOrder: 3,
+    },
+    {
+      title: "Fluffy Down-Alternative Loft",
+      category: "Comforters",
+      categoryKey: "comforters",
+      image: "/images/archita_bedding_18.jpg",
+      aspectRatio: "h-[220px] md:h-[280px]",
+      displayOrder: 4,
+    },
+    {
+      title: "Traditional Floral Mulmul Dohar Print",
+      category: "Dohars",
+      categoryKey: "dohars",
+      image: "/images/archita_bedding_14.jpg",
+      aspectRatio: "h-[300px] md:h-[380px]",
+      displayOrder: 5,
+    },
+    {
+      title: "Anti-Pilling Coral Fleece Texture",
+      category: "AC Blankets",
+      categoryKey: "blankets",
+      image: "/images/archita_bedding_22.jpg",
+      aspectRatio: "h-[280px] md:h-[350px]",
+      displayOrder: 6,
+    },
+    {
+      title: "Italian Monogram Embroidered Percale",
+      category: "Bedsheets",
+      categoryKey: "bedsheets",
+      image: "/images/archita_bedding_06.jpg",
+      aspectRatio: "h-[320px] md:h-[380px]",
+      displayOrder: 7,
+    },
+    {
+      title: "Handcrafted Sanganeri Indigo Dohar",
+      category: "Dohars",
+      categoryKey: "dohars",
+      image: "/images/archita_bedding_08.jpg",
+      aspectRatio: "h-[260px] md:h-[320px]",
+      displayOrder: 8,
+    },
+  ];
+
+  for (const item of defaultGallery) {
+    const existing = await prisma.galleryItem.findFirst({
+      where: { title: item.title },
+    });
+    if (!existing) {
+      await prisma.galleryItem.create({
+        data: item,
+      });
+    }
+  }
+  console.log(`✅ Seeded ${defaultGallery.length} gallery items`);
+
   console.log("🎉 Database seeding completed successfully!");
 }
+
 
 main()
   .catch((e) => {

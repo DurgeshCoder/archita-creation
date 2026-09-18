@@ -6,6 +6,7 @@ import {
   Package,
   Layers,
   Sparkles,
+  Image as ImageIcon,
   MessageSquare,
   ArrowUpRight,
   TrendingUp,
@@ -58,6 +59,14 @@ export default function AdminDashboard() {
       href: "/admin/collections",
     },
     {
+      label: "Design Gallery Photos",
+      value: stats?.metrics?.totalGalleryItems ?? 0,
+      description: "Showcase photos & weave closeups",
+      icon: ImageIcon,
+      color: "from-indigo-600 to-indigo-700",
+      href: "/admin/gallery",
+    },
+    {
       label: "Customer Inquiries",
       value: stats?.metrics?.totalInquiries ?? 0,
       description: "Direct WhatsApp & custom inquiries",
@@ -71,7 +80,7 @@ export default function AdminDashboard() {
     <div className="flex-1 flex flex-col">
       <AdminHeader
         title="Executive Dashboard"
-        description="Real-time control center for Archita Creation products, categories, and inquiries"
+        description="Real-time control center for Archita Creation products, categories, gallery, and inquiries"
         actionHref="/admin/products/new"
         actionLabel="Add New Product"
       />
@@ -87,7 +96,7 @@ export default function AdminDashboard() {
               Welcome to the Archita Creation CMS
             </h2>
             <p className="text-neutral-300 text-xs md:text-sm">
-              Manage your luxury bedding catalog, update thread count specifications, upload high-res imagery via ImageKit, and monitor buyer inquiries seamlessly.
+              Manage your luxury bedding catalog, update thread count specifications, upload high-res imagery via ImageKit, and curate the visual design gallery.
             </p>
           </div>
 
@@ -99,16 +108,22 @@ export default function AdminDashboard() {
               <Plus className="w-3.5 h-3.5" /> Add Product
             </Link>
             <Link
+              href="/admin/gallery"
+              className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white text-xs font-semibold rounded-lg backdrop-blur-sm transition-all flex items-center gap-2 border border-white/10"
+            >
+              <ImageIcon className="w-3.5 h-3.5" /> Add Gallery Photo
+            </Link>
+            <Link
               href="/admin/categories"
               className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white text-xs font-semibold rounded-lg backdrop-blur-sm transition-all flex items-center gap-2 border border-white/10"
             >
-              <Layers className="w-3.5 h-3.5" /> Manage Categories
+              <Layers className="w-3.5 h-3.5" /> Categories
             </Link>
             <Link
               href="/admin/collections"
               className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white text-xs font-semibold rounded-lg backdrop-blur-sm transition-all flex items-center gap-2 border border-white/10"
             >
-              <Sparkles className="w-3.5 h-3.5" /> Manage Collections
+              <Sparkles className="w-3.5 h-3.5" /> Collections
             </Link>
           </div>
         </div>

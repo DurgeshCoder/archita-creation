@@ -203,3 +203,108 @@ export async function getCategoryBySlug(slug: string) {
   return all.find((c) => c.slug === slug) || null;
 }
 
+/**
+ * Fetches all gallery items
+ */
+export async function getAllGalleryItems() {
+  try {
+    const dbGallery = await prisma.galleryItem.findMany({
+      where: { isActive: true },
+      orderBy: [
+        { displayOrder: "asc" },
+        { createdAt: "desc" },
+      ],
+    });
+
+    if (dbGallery && dbGallery.length > 0) {
+      return dbGallery;
+    }
+  } catch (error) {
+    console.warn("Prisma query fallback for gallery items:", (error as Error).message);
+  }
+
+  return [
+    {
+      id: "1",
+      title: "Presidential Bedroom Suite Decor",
+      category: "Master Bedroom",
+      categoryKey: "bedding-sets",
+      image: "/images/archita_bedding_01.jpg",
+      aspectRatio: "h-[320px] md:h-[400px]",
+      displayOrder: 1,
+      isActive: true,
+    },
+    {
+      id: "2",
+      title: "Folded Excellence Cotton Sateen Weave",
+      category: "Bedsheets",
+      categoryKey: "bedsheets",
+      image: "/images/archita_bedding_07.jpg",
+      aspectRatio: "h-[250px] md:h-[300px]",
+      displayOrder: 2,
+      isActive: true,
+    },
+    {
+      id: "3",
+      title: "Royal Palace Jacquard Detail",
+      category: "Bedding Sets",
+      categoryKey: "bedding-sets",
+      image: "/images/archita_bedding_12.jpg",
+      aspectRatio: "h-[350px] md:h-[450px]",
+      displayOrder: 3,
+      isActive: true,
+    },
+    {
+      id: "4",
+      title: "Fluffy Down-Alternative Loft",
+      category: "Comforters",
+      categoryKey: "comforters",
+      image: "/images/archita_bedding_18.jpg",
+      aspectRatio: "h-[220px] md:h-[280px]",
+      displayOrder: 4,
+      isActive: true,
+    },
+    {
+      id: "5",
+      title: "Traditional Floral Mulmul Dohar Print",
+      category: "Dohars",
+      categoryKey: "dohars",
+      image: "/images/archita_bedding_14.jpg",
+      aspectRatio: "h-[300px] md:h-[380px]",
+      displayOrder: 5,
+      isActive: true,
+    },
+    {
+      id: "6",
+      title: "Anti-Pilling Coral Fleece Texture",
+      category: "AC Blankets",
+      categoryKey: "blankets",
+      image: "/images/archita_bedding_22.jpg",
+      aspectRatio: "h-[280px] md:h-[350px]",
+      displayOrder: 6,
+      isActive: true,
+    },
+    {
+      id: "7",
+      title: "Italian Monogram Embroidered Percale",
+      category: "Bedsheets",
+      categoryKey: "bedsheets",
+      image: "/images/archita_bedding_06.jpg",
+      aspectRatio: "h-[320px] md:h-[380px]",
+      displayOrder: 7,
+      isActive: true,
+    },
+    {
+      id: "8",
+      title: "Handcrafted Sanganeri Indigo Dohar",
+      category: "Dohars",
+      categoryKey: "dohars",
+      image: "/images/archita_bedding_08.jpg",
+      aspectRatio: "h-[260px] md:h-[320px]",
+      displayOrder: 8,
+      isActive: true,
+    },
+  ];
+}
+
+

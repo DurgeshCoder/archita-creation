@@ -7,6 +7,7 @@ import {
   Package,
   Layers,
   Sparkles,
+  Image as ImageIcon,
   MessageSquare,
   ExternalLink,
   LogOut,
@@ -38,6 +39,11 @@ const NAV_ITEMS = [
     name: "Collections",
     href: "/admin/collections",
     icon: Sparkles,
+  },
+  {
+    name: "Design Gallery",
+    href: "/admin/gallery",
+    icon: ImageIcon,
   },
   {
     name: "Inquiries & Orders",

@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function WhatsAppCall() {
   const whatsappNumber = "919795872419";
   const whatsappMessage = encodeURIComponent(
-    "Hello Achtia Creation, I am interested in your luxury bedding collections. I would like to request your latest catalogue and enquire about pricing."
+    "Hello Archita Creation, I am interested in your luxury bedding collections. I would like to request your latest catalogue and enquire about pricing."
   );
   
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;

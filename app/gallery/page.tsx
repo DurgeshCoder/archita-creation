@@ -4,7 +4,7 @@ import MasonryGallery from "@/components/MasonryGallery";
 
 export const metadata: Metadata = {
   title: "Design Gallery & Portfolio",
-  description: "Browse curated collections of luxury bedroom décor featuring Achtia Creation's premium cotton bedsheets, comforters, and dohars.",
+  description: "Browse curated collections of luxury bedroom décor featuring Archita Creation's premium cotton bedsheets, comforters, and dohars.",
 };
 
 export default function Gallery() {

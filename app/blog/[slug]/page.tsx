@@ -33,9 +33,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       canonical: `/blog/${post.slug}`,
     },
     openGraph: {
-      title: `${post.title} | Achtia Creation Blog`,
+      title: `${post.title} | Archita Creation Blog`,
       description: post.excerpt,
-      url: `https://www.achtiacreation.com/blog/${post.slug}`,
+      url: `https://www.architacreation.com/blog/${post.slug}`,
       images: [
         {
           url: post.featuredImage,
@@ -143,7 +143,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": post.title,
-    "image": [`https://www.achtiacreation.com${post.featuredImage}`],
+    "image": [`https://www.architacreation.com${post.featuredImage}`],
     "datePublished": "2026-06-25T10:00:00+05:30",
     "dateModified": "2026-06-25T10:00:00+05:30",
     "author": [
@@ -155,16 +155,16 @@ export default async function BlogPostPage({ params }: PageProps) {
     ],
     "publisher": {
       "@type": "Organization",
-      "name": "Achtia Creation",
+      "name": "Archita Creation",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://www.achtiacreation.com/images/logo.png",
+        "url": "https://www.architacreation.com/images/logo.png",
       },
     },
     "description": post.excerpt,
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://www.achtiacreation.com/blog/${post.slug}`,
+      "@id": `https://www.architacreation.com/blog/${post.slug}`,
     },
   };
 

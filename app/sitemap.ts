@@ -1,8 +1,10 @@
 import { MetadataRoute } from "next";
 import { PRODUCTS, BLOG_POSTS } from "@/constants";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://www.achtiacreation.com";
+  const baseUrl = "https://www.architacreation.com";
 
   // Core website pages
   const routes = [

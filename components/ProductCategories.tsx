@@ -11,31 +11,31 @@ export default function ProductCategories() {
     {
       name: "Bedsheets",
       href: "/bedsheets",
-      image: "/images/bedsheets_category.jpg",
+      image: "/images/archita_bedding_02.jpg",
       description: "Made from premium long-staple cotton in high thread count sateen and percale. Rest in cool, silky smooth luxury.",
     },
     {
       name: "Comforters",
       href: "/comforters",
-      image: "/images/comforters_category.jpg",
+      image: "/images/archita_bedding_17.jpg",
       description: "Plush, cloud-like down alternative duvets with box-stitch quilting for consistent year-round sleeping comfort.",
     },
     {
       name: "AC Blankets",
       href: "/blankets",
-      image: "/images/blankets_category.jpg",
+      image: "/images/archita_bedding_23.jpg",
       description: "Featherlight, anti-pilling fleece blankets that offer cozy, velvety warmth in air-conditioned environments.",
     },
     {
       name: "Dohars",
       href: "/dohars",
-      image: "/images/dohars_category.jpg",
+      image: "/images/archita_bedding_15.jpg",
       description: "Authentic Rajasthani hand-block print designs layered between soft mulmul cotton and warm cotton flannel.",
     },
     {
       name: "Bedding Sets",
       href: "/bedding-sets",
-      image: "/images/bedding_sets_category.jpg",
+      image: "/images/archita_bedding_26.jpg",
       description: "Complete coordinated bed styling suites containing sheet sets, shams, comforter, and decorative cushion cases.",
     },
   ];
@@ -45,7 +45,7 @@ export default function ProductCategories() {
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <SectionTitle
           title="Product Categories"
-          subtitle="Achtia Offerings"
+          subtitle="Archita Offerings"
           description="Tailored bedding collections crafted for diverse sensory preferences and seasonal transitions, bringing boutique hotel luxury home."
         />
 

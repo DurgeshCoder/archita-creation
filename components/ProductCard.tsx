@@ -13,7 +13,7 @@ interface ProductCardProps {
 export default function ProductCard({ product }: ProductCardProps) {
   const whatsappNumber = "919795872419";
   const whatsappMessage = encodeURIComponent(
-    `Hello Achtia Creation, I am interested in purchasing or enquiring about the "${product.name}" from your "${product.collection}". Please share pricing and stock availability.`
+    `Hello Archita Creation, I am interested in purchasing or enquiring about the "${product.name}" from your "${product.collection}". Please share pricing and stock availability.`
   );
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 

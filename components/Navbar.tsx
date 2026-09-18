@@ -100,7 +100,7 @@ export default function Navbar() {
             className="flex flex-col items-start leading-none group"
           >
             <span className="font-serif text-2xl md:text-3xl font-bold tracking-widest uppercase transition-colors duration-300 text-primary dark:text-secondary group-hover:text-secondary-dark">
-              Achtia
+              Archita
             </span>
             <span className="font-sans text-xs md:text-sm tracking-[0.25em] text-luxury-dark/60 dark:text-luxury-light/60 uppercase pl-0.5 mt-0.5">
               Creation

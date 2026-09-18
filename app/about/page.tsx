@@ -5,7 +5,7 @@ import { Eye, Target, Compass, ShieldCheck, Heart } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "About Us",
-  description: "Learn about Achtia Creation's rich textile manufacturing heritage, our mission of sleep comfort, and our high-end weaving mills in Panipat.",
+  description: "Learn about Archita Creation's rich textile manufacturing heritage, our mission of sleep comfort, and our high-end weaving mills in Panipat.",
 };
 
 export default function About() {
@@ -40,7 +40,7 @@ export default function About() {
           <div className="relative h-[450px] rounded-3xl overflow-hidden shadow-2xl">
             <Image
               src="/images/hero_bedroom.jpg"
-              alt="Achtia Creation Bedding Manufacturing Suite"
+              alt="Archita Creation Bedding Manufacturing Suite"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
@@ -57,7 +57,7 @@ export default function About() {
               Crafting Sleep Sanctuaries Since 1998
             </h2>
             <p className="font-sans text-sm md:text-base text-luxury-dark/70 dark:text-luxury-light/70 leading-relaxed font-light">
-              Deep in the heart of India&apos;s textile capital, Panipat, Achtia Creation was founded with a singular, clear mandate: to end the compromise between high-durability fabrics and sensory luxury. What began as a modest weaving studio with four handlooms has evolved into a state-of-the-art production ecosystem supplying linens to luxury boutique hotels, retailers, and private homes globally.
+              Deep in the heart of India&apos;s textile capital, Panipat, Archita Creation was founded with a singular, clear mandate: to end the compromise between high-durability fabrics and sensory luxury. What began as a modest weaving studio with four handlooms has evolved into a state-of-the-art production ecosystem supplying linens to luxury boutique hotels, retailers, and private homes globally.
             </p>
             <p className="font-sans text-sm text-luxury-dark/60 dark:text-luxury-light/60 leading-relaxed font-light">
               Our weaving mills combine high-precision electronic airjet looms with the irreplaceable wisdom of master tailors and block printers. We source certified Giza long-staple cotton fibers, finishing them with organic silk-protein processes to achieve a drape and hand-feel that transforms sleep into a nightly retreat.
@@ -150,8 +150,8 @@ export default function About() {
           {/* Right Column: Image */}
           <div className="relative h-[480px] rounded-3xl overflow-hidden shadow-2xl lg:order-1">
             <Image
-              src="/images/bedsheets_category.jpg"
-              alt="Achtia Creation Quality Inspecting Room"
+              src="/images/archita_bedding_03.jpg"
+              alt="Archita Creation Quality Inspecting Room"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"

@@ -40,7 +40,7 @@ export default function WhyChooseUs() {
     <section className="py-24 bg-accent/20 dark:bg-luxury-dark/40 relative">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <SectionTitle
-          title="Why Choose Achtia Creation"
+          title="Why Choose Archita Creation"
           subtitle="Uncompromising Quality"
           description="Crafting more than just fabrics—we build sleeping environments designed to nurture skin health, retain colors, and deliver absolute tactile bliss."
         />

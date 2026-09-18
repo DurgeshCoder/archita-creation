@@ -26,7 +26,7 @@ export default function Footer() {
         <div className="flex flex-col space-y-6">
           <Link href="/" className="flex flex-col items-start leading-none group">
             <span className="font-serif text-3xl font-bold tracking-widest uppercase text-secondary">
-              Achtia
+              Archita
             </span>
             <span className="font-sans text-xs tracking-[0.25em] text-white/50 uppercase mt-0.5 pl-0.5">
               Creation
@@ -64,7 +64,7 @@ export default function Footer() {
           <div className="flex flex-col space-y-3 pt-2 text-sm text-white/70">
             <div className="flex items-start">
               <MapPin className="w-5 h-5 text-secondary mr-3 shrink-0 mt-0.5" />
-              <span>Achtia House, Indra Nagar, Lucknow, Uttar Pradesh - 226016, India</span>
+              <span>Archita House, Indra Nagar, Lucknow, Uttar Pradesh - 226016, India</span>
             </div>
             <div className="flex items-center">
               <Phone className="w-4 h-4 text-secondary mr-4 shrink-0" />
@@ -74,8 +74,8 @@ export default function Footer() {
             </div>
             <div className="flex items-center">
               <Mail className="w-4 h-4 text-secondary mr-4 shrink-0" />
-              <Link href="mailto:info@achtiacreation.com" className="hover:text-secondary transition-colors">
-                info@achtiacreation.com
+              <Link href="mailto:info@architacreation.com" className="hover:text-secondary transition-colors">
+                info@architacreation.com
               </Link>
             </div>
             <div className="flex items-center">
@@ -189,7 +189,7 @@ export default function Footer() {
             </form>
             {subscribed && (
               <p className="text-xs text-green-400 mt-2 animate-fade-in font-medium">
-                Thank you! Welcome to Achtia Luxury.
+                Thank you! Welcome to Archita Luxury.
               </p>
             )}
           </div>
@@ -204,7 +204,7 @@ export default function Footer() {
               allowFullScreen={false}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Achtia Creation Location Map"
+              title="Archita Creation Location Map"
             />
             <div className="absolute inset-0 bg-primary/10 pointer-events-none transition-opacity duration-300 group-hover:opacity-0" />
           </div>
@@ -212,7 +212,7 @@ export default function Footer() {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between text-xs text-white/40 gap-4">
-        <span>© {currentYear} Achtia Creation. All Rights Reserved. Co-crafted with Luxury.</span>
+        <span>© {currentYear} Archita Creation. All Rights Reserved. Co-crafted with Luxury.</span>
         <div className="flex space-x-6">
           <Link href="/privacy" className="hover:text-secondary transition-colors">
             Privacy Policy

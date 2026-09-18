@@ -66,13 +66,13 @@ export const PRODUCTS: Product[] = [
     collection: "Excellence Collection",
     price: "₹4,499",
     rating: 5,
-    image: "/images/achtia_bedding_01.jpg",
+    image: "/images/archita_bedding_01.jpg",
     images: [
-      "/images/achtia_bedding_01.jpg",
-      "/images/achtia_bedding_02.jpg",
-      "/images/achtia_bedding_03.jpg",
-      "/images/achtia_bedding_04.jpg",
-      "/images/achtia_bedding_05.jpg"
+      "/images/archita_bedding_01.jpg",
+      "/images/archita_bedding_02.jpg",
+      "/images/archita_bedding_03.jpg",
+      "/images/archita_bedding_04.jpg",
+      "/images/archita_bedding_05.jpg"
     ],
     description: "Crafted from 100% long-staple Giza cotton with a luscious 400 thread count sateen weave, the Excellence Sheet offers an ultra-soft feel and a beautiful subtle sheen. Engineered for longevity and maximum breathability, this sheet set gets softer with every wash while remaining resistant to pilling and fading.",
     shortDescription: "400 TC long-staple sateen Giza cotton sheet set with elegant hemstitching.",
@@ -110,13 +110,13 @@ export const PRODUCTS: Product[] = [
     collection: "Italian Embroidery",
     price: "₹6,299",
     rating: 4.9,
-    image: "/images/achtia_bedding_06.jpg",
+    image: "/images/archita_bedding_06.jpg",
     images: [
-      "/images/achtia_bedding_06.jpg",
-      "/images/achtia_bedding_07.jpg",
-      "/images/achtia_bedding_08.jpg",
-      "/images/achtia_bedding_09.jpg",
-      "/images/achtia_bedding_10.jpg"
+      "/images/archita_bedding_06.jpg",
+      "/images/archita_bedding_07.jpg",
+      "/images/archita_bedding_08.jpg",
+      "/images/archita_bedding_09.jpg",
+      "/images/archita_bedding_10.jpg"
     ],
     description: "Inspired by classic Tuscan heritage, our Italian Embroidery collection features precision satin-stitch double borders embroidered on 600 thread count cotton percale. Crisp, cool, and exceptionally breathable, it offers the distinct luxury feel of a world-class boutique hotel room.",
     shortDescription: "600 TC Egyptian Cotton Percale Sheets with Italian double-border embroidery.",
@@ -152,13 +152,13 @@ export const PRODUCTS: Product[] = [
     collection: "Clay Craft",
     price: "₹2,999",
     rating: 4.8,
-    image: "/images/achtia_bedding_11.jpg",
+    image: "/images/archita_bedding_11.jpg",
     images: [
-      "/images/achtia_bedding_11.jpg",
-      "/images/achtia_bedding_12.jpg",
-      "/images/achtia_bedding_13.jpg",
-      "/images/achtia_bedding_14.jpg",
-      "/images/achtia_bedding_15.jpg"
+      "/images/archita_bedding_11.jpg",
+      "/images/archita_bedding_12.jpg",
+      "/images/archita_bedding_13.jpg",
+      "/images/archita_bedding_14.jpg",
+      "/images/archita_bedding_15.jpg"
     ],
     description: "Designed using traditional hand-block printing techniques of Rajasthan, the Clay Craft Indigo Dohar features three layers of fine mulmul cotton. Sandwiching a soft cotton flannel layer inside, it provides the perfect breathable warmth for air-conditioned rooms.",
     shortDescription: "3-layer mulmul cotton Dohar featuring authentic organic indigo hand-block printing.",
@@ -193,13 +193,13 @@ export const PRODUCTS: Product[] = [
     collection: "Clouds",
     price: "₹5,499",
     rating: 5,
-    image: "/images/achtia_bedding_16.jpg",
+    image: "/images/archita_bedding_16.jpg",
     images: [
-      "/images/achtia_bedding_16.jpg",
-      "/images/achtia_bedding_17.jpg",
-      "/images/achtia_bedding_18.jpg",
-      "/images/achtia_bedding_19.jpg",
-      "/images/achtia_bedding_20.jpg"
+      "/images/archita_bedding_16.jpg",
+      "/images/archita_bedding_17.jpg",
+      "/images/archita_bedding_18.jpg",
+      "/images/archita_bedding_19.jpg",
+      "/images/archita_bedding_20.jpg"
     ],
     description: "Live up to the feeling of sleeping on a cloud. Filled with 350 GSM of premium hypoallergenic down-alternative microgel and encased in a 300 TC sateen cotton casing. Box-stitch quilting ensures that the filling is evenly distributed, eliminating cold spots for consistent warmth throughout the night.",
     shortDescription: "Hypoallergenic down-alternative comforter, 350 GSM with box-stitch quilting.",
@@ -233,12 +233,12 @@ export const PRODUCTS: Product[] = [
     collection: "Altra",
     price: "₹1,899",
     rating: 4.7,
-    image: "/images/achtia_bedding_21.jpg",
+    image: "/images/archita_bedding_21.jpg",
     images: [
-      "/images/achtia_bedding_21.jpg",
-      "/images/achtia_bedding_22.jpg",
-      "/images/achtia_bedding_23.jpg",
-      "/images/achtia_bedding_24.jpg"
+      "/images/archita_bedding_21.jpg",
+      "/images/archita_bedding_22.jpg",
+      "/images/archita_bedding_23.jpg",
+      "/images/archita_bedding_24.jpg"
     ],
     description: "The Altra Luxury Fleece Blanket is designed to provide light, cozy warmth on chilly summer nights or under central air conditioning. Made from high-density, anti-pilling micro-fleece, it features a velvety texture that is incredibly soft to the touch.",
     shortDescription: "Ultra-soft micro-fleece AC blanket, lightweight and anti-pilling with velvet binding.",
@@ -272,12 +272,12 @@ export const PRODUCTS: Product[] = [
     collection: "Mughal",
     price: "₹12,499",
     rating: 5,
-    image: "/images/achtia_bedding_25.jpg",
+    image: "/images/archita_bedding_25.jpg",
     images: [
-      "/images/achtia_bedding_25.jpg",
-      "/images/achtia_bedding_26.jpg",
-      "/images/achtia_bedding_27.jpg",
-      "/images/achtia_bedding_28.jpg"
+      "/images/archita_bedding_25.jpg",
+      "/images/archita_bedding_26.jpg",
+      "/images/archita_bedding_27.jpg",
+      "/images/archita_bedding_28.jpg"
     ],
     description: "Elevate your suite with the ultimate bedroom upgrade. The Royal Palace Bedding Set combines our iconic 600 thread count sheets, a premium box-stitched matching comforter, and coordinating pillow covers for an aesthetically curated luxury display of royalty.",
     shortDescription: "The ultimate 7-piece bedroom set, featuring 600 TC sheets and matching comforter.",
@@ -314,63 +314,63 @@ export const COLLECTIONS: Collection[] = [
   {
     id: "excellence",
     name: "Excellence Collection",
-    image: "/images/bedsheets_category.jpg",
+    image: "/images/archita_bedding_03.jpg",
     description: "Sophisticated minimalism meets luxury. Muted tones and refined patterns tailored for contemporary bedrooms.",
     theme: "Modern Minimalism"
   },
   {
     id: "italian-embroidery",
     name: "Italian Embroidery",
-    image: "/images/bedding_sets_category.jpg",
+    image: "/images/archita_bedding_08.jpg",
     description: "Intricate borders and customized monograms reminiscent of Renaissance elegance and architectural geometry.",
     theme: "Renaissance Heritage"
   },
   {
     id: "clay-craft",
     name: "Clay Craft",
-    image: "/images/dohars_category.jpg",
+    image: "/images/archita_bedding_13.jpg",
     description: "Earthy tones and organic block prints inspired by heritage pottery, terra cotta, and desert indigo landscapes.",
     theme: "Organic & Handcrafted"
   },
   {
     id: "amrit",
     name: "Amrit Collection",
-    image: "/images/hero_bedroom.jpg",
+    image: "/images/archita_bedding_05.jpg",
     description: "Pure white and gold weaves celebrating sacred geometry, timeless purity, and serene bedroom sanctuary aesthetics.",
     theme: "Divine Serenity"
   },
   {
     id: "clouds",
     name: "Clouds Collection",
-    image: "/images/comforters_category.jpg",
+    image: "/images/archita_bedding_19.jpg",
     description: "Featherlight, incredibly puffy textures and pastel hues designed for the ultimate weightless sleeping experience.",
     theme: "Plush Weightlessness"
   },
   {
     id: "mughal",
     name: "Mughal Heritage",
-    image: "/images/hero_bedroom.jpg",
+    image: "/images/archita_bedding_27.jpg",
     description: "Exquisite paisley designs and royal court patterns block-printed on fine luxury organic cotton.",
     theme: "Royal Court Elegance"
   },
   {
     id: "florida",
     name: "Florida Breezes",
-    image: "/images/blankets_category.jpg",
+    image: "/images/archita_bedding_24.jpg",
     description: "Vibrant tropical motifs and crisp coastal shades perfect for sunlit rooms and summer styling.",
     theme: "Coastal Escape"
   },
   {
     id: "shubhrang",
     name: "Shubhrang Pure White",
-    image: "/images/bedsheets_category.jpg",
+    image: "/images/archita_bedding_10.jpg",
     description: "Pristine white-on-white self jacquards and dobby stripes representing high-end hospitalities and villas.",
     theme: "Pristine Whites"
   },
   {
     id: "altra",
     name: "Altra Modern",
-    image: "/images/blankets_category.jpg",
+    image: "/images/archita_bedding_21.jpg",
     description: "Deep colors, sharp geometric block details, and ultra-plush velvet bindings for bold modern statements.",
     theme: "Bold & Contemporary"
   }
@@ -460,7 +460,7 @@ export const TESTIMONIALS: Testimonial[] = [
     role: "Lead Interior Designer",
     company: "Studio Elegance",
     rating: 5,
-    review: "I have sourced bedding collections for my luxury residential projects from Achtia Creation for over three years. The fabric quality, weight, and sheen of their sateen sheets are outstanding. My clients consistently remark on how soft they are.",
+    review: "I have sourced bedding collections for my luxury residential projects from Archita Creation for over three years. The fabric quality, weight, and sheen of their sateen sheets are outstanding. My clients consistently remark on how soft they are.",
     image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop"
   },
   {
@@ -469,7 +469,7 @@ export const TESTIMONIALS: Testimonial[] = [
     role: "General Manager",
     company: "The Grand Vista Boutique Hotel",
     rating: 5,
-    review: "Guest reviews for our boutique resort frequently praise our bed linen. We use Achtia Creation's Italian Embroidery and Shubhrang collections. They hold up beautifully to commercial laundering while retaining their crisp, five-star appearance.",
+    review: "Guest reviews for our boutique resort frequently praise our bed linen. We use Archita Creation's Italian Embroidery and Shubhrang collections. They hold up beautifully to commercial laundering while retaining their crisp, five-star appearance.",
     image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=200&auto=format&fit=crop"
   },
   {
@@ -478,7 +478,7 @@ export const TESTIMONIALS: Testimonial[] = [
     role: "Premium Retailer Partner",
     company: "Deshmukh Furnishings",
     rating: 5,
-    review: "Bedsheets from Achtia Creation fly off our shelves. The Mughal prints and Clay Craft Dohars display incredible print precision and soft texture that customers instantly fall in love with. Excellent lead times and pristine packaging.",
+    review: "Bedsheets from Archita Creation fly off our shelves. The Mughal prints and Clay Craft Dohars display incredible print precision and soft texture that customers instantly fall in love with. Excellent lead times and pristine packaging.",
     image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop"
   },
   {
@@ -487,7 +487,7 @@ export const TESTIMONIALS: Testimonial[] = [
     role: "Homeowner & Architect",
     company: "Kapur Residences",
     rating: 5,
-    review: "Sleeping under the Cloud Comforter is an unmatched experience. It is lightweight, perfectly fluffy, and regulates heat incredibly well in AC. Achtia Creation has redefined bedding luxury in India.",
+    review: "Sleeping under the Cloud Comforter is an unmatched experience. It is lightweight, perfectly fluffy, and regulates heat incredibly well in AC. Archita Creation has redefined bedding luxury in India.",
     image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=200&auto=format&fit=crop"
   }
 ];
@@ -529,8 +529,8 @@ export const MANUFACTURING_TIMELINE = [
 // 6. FAQS (20 QUESTIONS FOR SEO OPTIMIZATION)
 export const FAQS: FAQItem[] = [
   {
-    question: "What makes Achtia Creation bedding collections premium?",
-    answer: "Achtia Creation utilizes only premium, certified long-staple cotton (such as Giza and Egyptian Cotton) with high thread counts (up to 600 TC) woven on modern airjet looms. We finish our fabrics with organic processes that impart a silk-like sheen, and we enforce a rigorous 3-tier inspection protocol, ensuring that every sheet, comforter, and dohar is flawless."
+    question: "What makes Archita Creation bedding collections premium?",
+    answer: "Archita Creation utilizes only premium, certified long-staple cotton (such as Giza and Egyptian Cotton) with high thread counts (up to 600 TC) woven on modern airjet looms. We finish our fabrics with organic processes that impart a silk-like sheen, and we enforce a rigorous 3-tier inspection protocol, ensuring that every sheet, comforter, and dohar is flawless."
   },
   {
     question: "What is Giza Cotton, and why is it used in the Excellence Collection?",
@@ -542,7 +542,7 @@ export const FAQS: FAQItem[] = [
   },
   {
     question: "What does Thread Count (TC) actually mean?",
-    answer: "Thread Count represents the number of horizontal (weft) and vertical (warp) threads woven into one square inch of fabric. While higher numbers like 400 TC and 600 TC generally mean a smoother, denser fabric, the quality of the thread itself (like long-staple cotton) is more critical. Achtia Creation never compromises on fiber grade, so our high thread counts translate directly into true luxury."
+    answer: "Thread Count represents the number of horizontal (weft) and vertical (warp) threads woven into one square inch of fabric. While higher numbers like 400 TC and 600 TC generally mean a smoother, denser fabric, the quality of the thread itself (like long-staple cotton) is more critical. Archita Creation never compromises on fiber grade, so our high thread counts translate directly into true luxury."
   },
   {
     question: "What is the difference between Sateen and Percale weaves?",
@@ -550,7 +550,7 @@ export const FAQS: FAQItem[] = [
   },
   {
     question: "Are your sheets and blankets pre-shrunk?",
-    answer: "Yes, all fabric used in Achtia Creation sheets, dohars, and comforters undergoes mechanical pre-shrinking (sanforization) during the finishing process. This ensures that the dimensions remain stable and fit your mattresses and pillows perfectly, even after numerous machine washes."
+    answer: "Yes, all fabric used in Archita Creation sheets, dohars, and comforters undergoes mechanical pre-shrinking (sanforization) during the finishing process. This ensures that the dimensions remain stable and fit your mattresses and pillows perfectly, even after numerous machine washes."
   },
   {
     question: "Are the colors on the bedsheets fade-resistant?",
@@ -569,7 +569,7 @@ export const FAQS: FAQItem[] = [
     answer: "Yes, our Clay Craft Dohars can be machine washed in cold water on a gentle, separate cycle. We advise using mild detergents, avoiding chlorine bleach, and line drying in the shade to maintain the organic block-printed indigo or herbal pigments."
   },
   {
-    question: "Does Achtia Creation offer deep-pocket fitted sheets?",
+    question: "Does Archita Creation offer deep-pocket fitted sheets?",
     answer: "Yes, our fitted bedsheets are manufactured with deep pockets and extra-thick premium elastic along the entire perimeter. This ensures a snug, secure fit on modern mattresses up to 12 inches thick, preventing the corners from popping up."
   },
   {
@@ -582,7 +582,7 @@ export const FAQS: FAQItem[] = [
   },
   {
     question: "Do you ship your home furnishing products all over India?",
-    answer: "Yes, Achtia Creation offers premium insured shipping across all pin codes in India. We partner with reliable air-courier services to ensure your order arrives in pristine condition. Tracking coordinates are sent instantly upon dispatch."
+    answer: "Yes, Archita Creation offers premium insured shipping across all pin codes in India. We partner with reliable air-courier services to ensure your order arrives in pristine condition. Tracking coordinates are sent instantly upon dispatch."
   },
   {
     question: "What is your return and exchange policy?",
@@ -598,7 +598,7 @@ export const FAQS: FAQItem[] = [
   },
   {
     question: "How long does a premium cotton bedsheet typically last?",
-    answer: "With proper care (mild detergents, warm washing, avoiding excessive bleach), a premium long-staple cotton bedsheet from Achtia Creation will easily maintain its sheen, softness, and structure for 3 to 5 years, outlasting cheap polyester sheets by triple the duration."
+    answer: "With proper care (mild detergents, warm washing, avoiding excessive bleach), a premium long-staple cotton bedsheet from Archita Creation will easily maintain its sheen, softness, and structure for 3 to 5 years, outlasting cheap polyester sheets by triple the duration."
   },
   {
     question: "How do I request a product catalogue for wholesale orders?",
@@ -619,7 +619,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "Bedsheet Buying Guide",
     date: "June 25, 2026",
     readTime: "6 min read",
-    featuredImage: "/images/bedsheets_category.jpg",
+    featuredImage: "/images/archita_bedding_01.jpg",
     author: {
       name: "Radhika Sharma",
       role: "Textile Consultant",
@@ -660,7 +660,7 @@ Sateen uses a four-over-one-under weave pattern. This exposes more thread surfac
 - Perfect for air-conditioned rooms and cooler months.
 
 ### Percale Weave
-Percale uses a classic grid, one-over-one-under weave. This creates:
+Percale uses a classic grid, one-over-one-under weave. This exposes less thread surface, creating:
 - A crisp, cool-to-the-touch feel (resembling high-end hotel beds).
 - A clean, matte look.
 - Exceptional airflow, keeping hot sleepers sweat-free.
@@ -683,7 +683,7 @@ To protect your investment and keep your cotton sheets feeling luxurious:
     category: "Bedroom Styling",
     date: "June 20, 2026",
     readTime: "5 min read",
-    featuredImage: "/images/hero_bedroom.jpg",
+    featuredImage: "/images/archita_bedding_06.jpg",
     author: {
       name: "Kabir Mehta",
       role: "Luxury Interior Stylist",
@@ -736,7 +736,7 @@ Finally, dress the environment:
     category: "Fabric Guide",
     date: "June 15, 2026",
     readTime: "4 min read",
-    featuredImage: "/images/comforters_category.jpg",
+    featuredImage: "/images/archita_bedding_16.jpg",
     author: {
       name: "Dr. Amit Roy",
       role: "Textile Researcher",

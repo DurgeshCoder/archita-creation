@@ -41,7 +41,7 @@ export default function Hero() {
       <div className="absolute inset-0 z-0">
         <Image
           src="/images/hero_bedroom.jpg"
-          alt="Luxury Bedroom Bedding Set by Achtia Creation"
+          alt="Luxury Bedroom Bedding Set by Archita Creation"
           fill
           priority
           sizes="100vw"
@@ -105,7 +105,7 @@ export default function Hero() {
           <div className="p-8 rounded-3xl border border-luxury-dark/10 dark:border-white/10 shadow-2xl relative overflow-hidden backdrop-blur-xl bg-white/95 dark:bg-luxury-dark/40">
             <div className="absolute top-0 left-0 w-2 h-full bg-secondary" />
             <h3 className="font-serif text-lg font-bold text-luxury-dark dark:text-white mb-6 tracking-wide">
-              Achtia Promise
+              Archita Promise
             </h3>
             <div className="grid grid-cols-1 gap-6">
               {stats.map((stat, i) => {

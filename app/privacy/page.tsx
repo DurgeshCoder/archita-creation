@@ -3,7 +3,7 @@ import PageHeader from "@/components/PageHeader";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "Learn how Achtia Creation protects, encrypts, and handles your wholesale and retail purchase enquiry data.",
+  description: "Learn how Archita Creation protects, encrypts, and handles your wholesale and retail purchase enquiry data.",
 };
 
 export default function PrivacyPolicy() {
@@ -14,7 +14,7 @@ export default function PrivacyPolicy() {
       <section className="py-24 bg-white dark:bg-luxury-dark font-sans text-sm font-light text-luxury-dark/80 dark:text-white/80 leading-relaxed">
         <div className="max-w-3xl mx-auto px-6">
           <p className="mb-6">
-            At <strong>Achtia Creation</strong>, we hold the privacy of our retail clients, wholesale distributors, and interior designers in the highest regard. This Privacy Policy details how we collect, secure, and handle your data when you visit our website, request catalog assets, or place order enquiries.
+            At <strong>Archita Creation</strong>, we hold the privacy of our retail clients, wholesale distributors, and interior designers in the highest regard. This Privacy Policy details how we collect, secure, and handle your data when you visit our website, request catalog assets, or place order enquiries.
           </p>
 
           <h2 className="font-serif text-xl font-bold text-primary dark:text-secondary-light mt-8 mb-4">
@@ -49,7 +49,7 @@ export default function PrivacyPolicy() {
             3. Third-Party Sharing Restrictions
           </h2>
           <p className="mb-6">
-            Achtia Creation never sells, rents, or shares your personal details or corporate specs with third-party advertisers. Data is shared exclusively with our logistics courier partners (to ship order boxes across India) or payment providers under encrypted secure tunnels.
+            Archita Creation never sells, rents, or shares your personal details or corporate specs with third-party advertisers. Data is shared exclusively with our logistics courier partners (to ship order boxes across India) or payment providers under encrypted secure tunnels.
           </p>
 
           <h2 className="font-serif text-xl font-bold text-primary dark:text-secondary-light mt-8 mb-4">
@@ -60,7 +60,7 @@ export default function PrivacyPolicy() {
           </p>
 
           <div className="border-t border-luxury-dark/10 dark:border-white/10 pt-8 mt-12 text-xs text-luxury-dark/40 dark:text-white/40">
-            Last Updated: June 30, 2026. For questions regarding privacy policy terms, contact privacy@achtiacreation.com.
+            Last Updated: June 30, 2026. For questions regarding privacy policy terms, contact privacy@architacreation.com.
           </div>
         </div>
       </section>

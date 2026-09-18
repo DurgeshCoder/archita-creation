@@ -4,14 +4,14 @@ import PageHeader from "@/components/PageHeader";
 import BlogBrowser from "@/components/BlogBrowser";
 
 export const metadata: Metadata = {
-  title: "Insights & Guides | Achtia Creation Journal",
+  title: "Insights & Guides | Archita Creation Journal",
   description: "Discover luxury bedding style strategies, Giza cotton weaves explanation, thread count buying hacks, and linen care guides from our textile consultants.",
 };
 
 export default function BlogIndex() {
   return (
     <>
-      <PageHeader title="Achtia Insights Journal" breadcrumbs={[{ name: "Blog" }]} />
+      <PageHeader title="Archita Insights Journal" breadcrumbs={[{ name: "Blog" }]} />
       <section className="py-20 bg-white dark:bg-luxury-dark">
         <Suspense
           fallback={

@@ -51,7 +51,7 @@ export default function Contact() {
         designer: "Interior Designing Sourcing",
       };
       
-      const messageText = `Hello Achtia Creation, I would like to submit an enquiry:
+      const messageText = `Hello Archita Creation, I would like to submit an enquiry:
 - Name: ${formData.name}
 - Email: ${formData.email}
 - Phone: ${formData.phone}
@@ -108,7 +108,7 @@ export default function Contact() {
                     Lucknow Corporate Head Office
                   </h4>
                   <p className="font-sans text-xs text-luxury-dark/60 dark:text-white/50 mt-1 font-light">
-                    Achtia House, Indra Nagar, Lucknow, Uttar Pradesh - 226016, India
+                    Archita House, Indra Nagar, Lucknow, Uttar Pradesh - 226016, India
                   </p>
                 </div>
               </div>
@@ -133,8 +133,8 @@ export default function Contact() {
                     Corporate Email Enquiries
                   </h4>
                   <p className="font-sans text-xs text-luxury-dark/60 dark:text-white/50 mt-1 font-light">
-                    General: info@achtiacreation.com <br />
-                    Wholesale: sales@achtiacreation.com
+                    General: info@architacreation.com <br />
+                    Wholesale: sales@architacreation.com
                   </p>
                 </div>
               </div>
@@ -153,7 +153,7 @@ export default function Contact() {
                 <div>
                   <h4 className="font-bold text-sm">Enquiry Submitted Successfully</h4>
                   <p className="text-xs font-light mt-1">
-                    Thank you for contacting Achtia Creation. One of our luxury bedding representatives will call you within 24 business hours.
+                    Thank you for contacting Archita Creation. One of our luxury bedding representatives will call you within 24 business hours.
                   </p>
                 </div>
               </div>
@@ -275,7 +275,7 @@ export default function Contact() {
               allowFullScreen={false}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Achtia Creation Head Office"
+              title="Archita Creation Head Office"
             />
           </div>
         </div>

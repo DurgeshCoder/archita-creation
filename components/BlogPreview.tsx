@@ -13,7 +13,7 @@ export default function BlogPreview() {
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <SectionTitle
           title="Insights & Inspiration"
-          subtitle="Achtia Journal"
+          subtitle="Archita Journal"
           description="Read expert guides on fiber specifications, mattress thickness selections, and interior design styling tips from textile pros."
         />
 

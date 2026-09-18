@@ -13,7 +13,7 @@ export default function Testimonials() {
         <SectionTitle
           title="What Our Clients Say"
           subtitle="Testimonials"
-          description="Read experiences from the interior designers, boutique hotel partners, and retailers who trust Achtia Creation for high-standard linens."
+          description="Read experiences from the interior designers, boutique hotel partners, and retailers who trust Archita Creation for high-standard linens."
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">

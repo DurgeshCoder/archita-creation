@@ -24,7 +24,7 @@ export default function QualityPromise() {
             Luxury Standards
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white leading-tight">
-            The Achtia <br />Quality Promise
+            The Archita <br />Quality Promise
           </h2>
           <p className="font-sans text-sm text-white/70 leading-relaxed font-light">
             Every bedding item is woven, tailored, and inspected under one roof to ensure that your sleep sanctuary is draped in pure, toxic-free perfection.

@@ -11,7 +11,7 @@ export default function ManufacturingTimeline() {
         <SectionTitle
           title="Manufacturing Excellence"
           subtitle="Our Craft Process"
-          description="A behind-the-scenes look at the technical standards and artisanal skills that bring each Achtia Creation textile to life."
+          description="A behind-the-scenes look at the technical standards and artisanal skills that bring each Archita Creation textile to life."
         />
 
         <div className="relative border-l-2 border-primary/20 dark:border-secondary/20 ml-4 md:ml-12 pl-8 md:pl-16 space-y-12 max-w-4xl mx-auto py-4">

@@ -20,10 +20,10 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Achtia Creation - Luxury Bedding & Home Furnishing",
-    default: "Achtia Creation | Premium Bedding Collections & Luxury Giza Sheets",
+    template: "%s | Archita Creation - Luxury Bedding & Home Furnishing",
+    default: "Archita Creation | Premium Bedding Collections & Luxury Giza Sheets",
   },
-  description: "Discover Achtia Creation's premium bedding collections: 100% Giza cotton bedsheets, comforters, AC blankets, and hand-block dohars. Crafted for luxury and sleep comfort.",
+  description: "Discover Archita Creation's premium bedding collections: 100% Giza cotton bedsheets, comforters, AC blankets, and hand-block dohars. Crafted for luxury and sleep comfort.",
   keywords: [
     "premium bedsheets",
     "luxury bedding India",
@@ -32,31 +32,31 @@ export const metadata: Metadata = {
     "AC blankets",
     "dohars",
     "Panipat textile manufacturer",
-    "Achtia Creation"
+    "Archita Creation"
   ],
-  authors: [{ name: "Achtia Creation" }],
-  creator: "Achtia Creation",
-  publisher: "Achtia Creation",
+  authors: [{ name: "Archita Creation" }],
+  creator: "Archita Creation",
+  publisher: "Archita Creation",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://www.achtiacreation.com"),
+  metadataBase: new URL("https://www.architacreation.com"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Achtia Creation | Premium Bedding Collections & Giza Sheets",
-    description: "Experience the pinnacle of bedroom comfort with Achtia Creation's hand-block dohars, sateen sheets, and cozy microfiber comforters.",
-    url: "https://www.achtiacreation.com",
-    siteName: "Achtia Creation",
+    title: "Archita Creation | Premium Bedding Collections & Giza Sheets",
+    description: "Experience the pinnacle of bedroom comfort with Archita Creation's hand-block dohars, sateen sheets, and cozy microfiber comforters.",
+    url: "https://www.architacreation.com",
+    siteName: "Archita Creation",
     images: [
       {
         url: "/images/hero_bedroom.jpg",
         width: 1200,
         height: 630,
-        alt: "Achtia Creation Luxury Bedroom Bedding Suite",
+        alt: "Archita Creation Luxury Bedroom Bedding Suite",
       },
     ],
     locale: "en_IN",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Achtia Creation | Luxury Bedding & Home Furnishings",
+    title: "Archita Creation | Luxury Bedding & Home Furnishings",
     description: "Discover premium Giza sheets, quilts, AC blankets, and designer dohars handcrafted in India.",
     images: ["/images/hero_bedroom.jpg"],
   },

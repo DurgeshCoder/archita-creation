@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 export default function CTABanner() {
   const whatsappNumber = "919795872419";
   const whatsappMessage = encodeURIComponent(
-    "Hello Achtia Creation, I am interested in viewing your complete luxury bedding catalog. Please share the pricing sheet and catalog PDF."
+    "Hello Archita Creation, I am interested in viewing your complete luxury bedding catalog. Please share the pricing sheet and catalog PDF."
   );
   
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;

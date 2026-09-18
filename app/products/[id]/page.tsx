@@ -34,9 +34,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       canonical: `/products/${product.id}`,
     },
     openGraph: {
-      title: `${product.name} | Achtia Creation Bedding`,
+      title: `${product.name} | Archita Creation Bedding`,
       description: product.shortDescription,
-      url: `https://www.achtiacreation.com/products/${product.id}`,
+      url: `https://www.architacreation.com/products/${product.id}`,
       images: [
         {
           url: product.image,
@@ -65,7 +65,7 @@ export default async function ProductPage({ params }: PageProps) {
   // WhatsApp Enquiry Link
   const whatsappNumber = "919795872419";
   const whatsappMessage = encodeURIComponent(
-    `Hello Achtia Creation, I am interested in purchasing or enquiring about the "${product.name}" from your "${product.collection}" (Price: ${product.price}). Please share shipping options and availability details.`
+    `Hello Archita Creation, I am interested in purchasing or enquiring about the "${product.name}" from your "${product.collection}" (Price: ${product.price}). Please share shipping options and availability details.`
   );
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
@@ -74,17 +74,17 @@ export default async function ProductPage({ params }: PageProps) {
     "@context": "https://schema.org",
     "@type": "Product",
     "name": product.name,
-    "image": product.images.map((img) => `https://www.achtiacreation.com${img}`),
+    "image": product.images.map((img) => `https://www.architacreation.com${img}`),
     "description": product.description,
     "sku": product.id,
     "mpn": product.id,
     "brand": {
       "@type": "Brand",
-      "name": "Achtia Creation",
+      "name": "Archita Creation",
     },
     "offers": {
       "@type": "Offer",
-      "url": `https://www.achtiacreation.com/products/${product.id}`,
+      "url": `https://www.architacreation.com/products/${product.id}`,
       "priceCurrency": "INR",
       "price": product.price.replace("₹", "").replace(",", ""),
       "priceValidUntil": "2027-12-31",

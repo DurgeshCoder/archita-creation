@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 import ProductCard from "@/components/ProductCard";
-import { PRODUCTS } from "@/constants";
+import { getProductsByCategory } from "@/lib/data-service";
 
 export const metadata: Metadata = {
   title: "Premium Dohars Collection",
   description: "Browse hand-block print Dohars made from organic mulmul cotton encasing a soft flannel layer. Traditional Rajasthani prints.",
 };
 
-export default function DoharsCategory() {
-  const dohars = PRODUCTS.filter((p) => p.category === "dohars");
+export default async function DoharsCategory() {
+  const dohars = await getProductsByCategory("dohars");
   const breadcrumbs = [{ name: "Collections", href: "/collections" }, { name: "Dohars" }];
 
   return (

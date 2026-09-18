@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 import ProductCard from "@/components/ProductCard";
-import { PRODUCTS } from "@/constants";
+import { getProductsByCategory } from "@/lib/data-service";
 
 export const metadata: Metadata = {
   title: "Luxury Comforters Collection",
   description: "Explore our collection of fluffy, hypoallergenic down-alternative comforters. Designed with box-stitch panels for even warmth distribution.",
 };
 
-export default function ComfortersCategory() {
-  const comforters = PRODUCTS.filter((p) => p.category === "comforters");
+export default async function ComfortersCategory() {
+  const comforters = await getProductsByCategory("comforters");
   const breadcrumbs = [{ name: "Collections", href: "/collections" }, { name: "Comforters" }];
 
   return (

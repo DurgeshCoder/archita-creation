@@ -10,14 +10,22 @@ import MasonryGallery from "@/components/MasonryGallery";
 import FAQAccordion from "@/components/FAQAccordion";
 import BlogPreview from "@/components/BlogPreview";
 import CTABanner from "@/components/CTABanner";
+import { getAllCategories, getAllCollections } from "@/lib/data-service";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const [categories, collections] = await Promise.all([
+    getAllCategories(),
+    getAllCollections(),
+  ]);
+
   return (
     <>
       <Hero />
       <TrustedBy />
-      <FeaturedCollections />
-      <ProductCategories />
+      <FeaturedCollections initialCollections={collections} />
+      <ProductCategories initialCategories={categories} />
       <WhyChooseUs />
       <ManufacturingTimeline />
       <QualityPromise />

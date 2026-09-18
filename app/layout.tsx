@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import WhatsAppCall from "@/components/WhatsAppCall";
-import BackToTop from "@/components/BackToTop";
+import LayoutShell from "@/components/LayoutShell";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -86,6 +83,28 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const orgSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Archita Creation",
+    "url": "https://www.architacreation.com",
+    "logo": "https://www.architacreation.com/images/hero_bedroom.jpg",
+    "description": "Manufacturers and exporters of premium 100% Giza cotton bedsheets, comforters, AC blankets, and handcrafted dohars.",
+    "telephone": "+919795872419",
+    "email": "info@architacreation.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Archita House, Indira Nagar",
+      "addressLocality": "Lucknow",
+      "addressRegion": "Uttar Pradesh",
+      "postalCode": "226016",
+      "addressCountry": "IN"
+    },
+    "sameAs": [
+      "https://www.instagram.com/archita_creation_offical"
+    ]
+  };
+
   return (
     <html
       lang="en"
@@ -93,6 +112,10 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -108,13 +131,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col font-sans bg-white dark:bg-luxury-dark text-luxury-dark dark:text-luxury-light">
-        <Navbar />
-        <main className="flex-grow pt-[73px] lg:pt-[81px]">
-          {children}
-        </main>
-        <Footer />
-        <WhatsAppCall />
-        <BackToTop />
+        <LayoutShell>{children}</LayoutShell>
       </body>
     </html>
   );

@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 import ProductCard from "@/components/ProductCard";
-import { PRODUCTS } from "@/constants";
+import { getProductsByCategory } from "@/lib/data-service";
 
 export const metadata: Metadata = {
   title: "Luxury Bedding Sets",
   description: "Browse curated, coordinated bedding suites: sheets, pillow shams, comforters, and cushions. Match your bedroom aesthetics perfectly.",
 };
 
-export default function BeddingSetsCategory() {
-  const beddingSets = PRODUCTS.filter((p) => p.category === "bedding-sets");
+export default async function BeddingSetsCategory() {
+  const beddingSets = await getProductsByCategory("bedding-sets");
   const breadcrumbs = [{ name: "Collections", href: "/collections" }, { name: "Bedding Sets" }];
 
   return (

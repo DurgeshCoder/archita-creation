@@ -10,10 +10,49 @@ export default function CollectionsBrowser() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
+  const [productList, setProductList] = useState<any[]>(PRODUCTS);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 3; // Low threshold to demonstrate functional pagination on our sample dataset of 6 items
+  const itemsPerPage = 6;
+
+  const [categoryList, setCategoryList] = useState([
+    { value: "all", label: "All Items" },
+    { value: "bedsheets", label: "Bedsheets" },
+    { value: "comforters", label: "Comforters" },
+    { value: "blankets", label: "AC Blankets" },
+    { value: "dohars", label: "Dohars" },
+    { value: "bedding-sets", label: "Bedding Sets" },
+  ]);
+
+  useEffect(() => {
+    fetch("/api/products")
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setProductList(data);
+        }
+      })
+      .catch(() => {});
+
+    fetch("/api/categories")
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          const active = data.filter((c: any) => c.isActive !== false);
+          if (active.length > 0) {
+            setCategoryList([
+              { value: "all", label: "All Items" },
+              ...active.map((c: any) => ({
+                value: c.slug,
+                label: c.name,
+              })),
+            ]);
+          }
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   // Read URL query params on load
   useEffect(() => {
@@ -32,18 +71,21 @@ export default function CollectionsBrowser() {
 
   // Filter items
   const filteredProducts = useMemo(() => {
-    return PRODUCTS.filter((product) => {
+    return productList.filter((product) => {
+      const categorySlug = product.category?.slug || product.category || product.categoryId;
+      const collectionName = product.collection?.name || product.collection || "";
+
       const matchesSearch =
         product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.collection.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.description.toLowerCase().includes(searchQuery.toLowerCase());
+        collectionName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (product.description && product.description.toLowerCase().includes(searchQuery.toLowerCase()));
 
       const matchesCategory =
-        selectedCategory === "all" || product.category === selectedCategory;
+        selectedCategory === "all" || categorySlug === selectedCategory;
 
       return matchesSearch && matchesCategory;
     });
-  }, [searchQuery, selectedCategory]);
+  }, [productList, searchQuery, selectedCategory]);
 
   // Reset page when filters change
   useEffect(() => {
@@ -59,15 +101,6 @@ export default function CollectionsBrowser() {
     const start = (currentPage - 1) * itemsPerPage;
     return filteredProducts.slice(start, start + itemsPerPage);
   }, [filteredProducts, currentPage]);
-
-  const categories = [
-    { value: "all", label: "All Items" },
-    { value: "bedsheets", label: "Bedsheets" },
-    { value: "comforters", label: "Comforters" },
-    { value: "blankets", label: "AC Blankets" },
-    { value: "dohars", label: "Dohars" },
-    { value: "bedding-sets", label: "Bedding Sets" },
-  ];
 
   const handleClearFilters = () => {
     setSearchQuery("");
@@ -93,7 +126,7 @@ export default function CollectionsBrowser() {
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery("")}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-luxury-dark/40 dark:text-white/40 hover:text-primary transition-colors"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-luxury-dark/40 dark:text-white/40 hover:text-primary transition-colors cursor-pointer"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -102,11 +135,11 @@ export default function CollectionsBrowser() {
 
           {/* Category Filters (Horizontal scroll on mobile) */}
           <div className="flex items-center space-x-2 overflow-x-auto w-full lg:w-auto pb-2 lg:pb-0 no-scrollbar">
-            {categories.map((cat) => (
+            {categoryList.map((cat) => (
               <button
                 key={cat.value}
                 onClick={() => setSelectedCategory(cat.value)}
-                className={`px-5 py-2.5 rounded-full text-xs font-medium tracking-wide uppercase transition-all shrink-0 border ${
+                className={`px-5 py-2.5 rounded-full text-xs font-medium tracking-wide uppercase transition-all shrink-0 border cursor-pointer ${
                   selectedCategory === cat.value
                     ? "bg-primary border-primary text-white"
                     : "bg-white dark:bg-luxury-dark border-luxury-dark/10 dark:border-white/10 text-luxury-dark/70 dark:text-luxury-light hover:border-secondary hover:text-secondary"
@@ -135,7 +168,7 @@ export default function CollectionsBrowser() {
                 <button
                   onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
                   disabled={currentPage === 1}
-                  className="p-3 rounded-full border border-luxury-dark/10 dark:border-white/10 disabled:opacity-30 disabled:cursor-not-allowed hover:border-secondary hover:text-secondary transition-all"
+                  className="p-3 rounded-full border border-luxury-dark/10 dark:border-white/10 disabled:opacity-30 disabled:cursor-not-allowed hover:border-secondary hover:text-secondary transition-all cursor-pointer"
                   aria-label="Previous Page"
                 >
                   <ChevronLeft className="w-4 h-4" />
@@ -147,7 +180,7 @@ export default function CollectionsBrowser() {
                 <button
                   onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
                   disabled={currentPage === totalPages}
-                  className="p-3 rounded-full border border-luxury-dark/10 dark:border-white/10 disabled:opacity-30 disabled:cursor-not-allowed hover:border-secondary hover:text-secondary transition-all"
+                  className="p-3 rounded-full border border-luxury-dark/10 dark:border-white/10 disabled:opacity-30 disabled:cursor-not-allowed hover:border-secondary hover:text-secondary transition-all cursor-pointer"
                   aria-label="Next Page"
                 >
                   <ChevronRight className="w-4 h-4" />
@@ -165,7 +198,7 @@ export default function CollectionsBrowser() {
             </p>
             <button
               onClick={handleClearFilters}
-              className="bg-primary hover:bg-primary-dark text-white px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all mt-4"
+              className="bg-primary hover:bg-primary-dark text-white px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all mt-4 cursor-pointer"
             >
               Reset All Filters
             </button>

@@ -1,0 +1,100 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  name         String
+  passwordHash String   @map("password_hash")
+  role         String   @default("ADMIN") // ADMIN, SUPERADMIN
+  avatar       String?
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("admins")
+}
+
+model Category {
+  id           String    @id @default(uuid())
+  slug         String    @unique
+  name         String
+  description  String?   @db.Text
+  image        String?   @db.Text
+  displayOrder Int       @default(0) @map("display_order")
+  isActive     Boolean   @default(true) @map("is_active")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+  products     Product[]
+
+  @@map("categories")
+}
+
+model Collection {
+  id           String    @id @default(uuid())
+  slug         String    @unique
+  name         String
+  description  String?   @db.Text
+  theme        String?
+  image        String?   @db.Text
+  displayOrder Int       @default(0) @map("display_order")
+  isActive     Boolean   @default(true) @map("is_active")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+  products     Product[]
+
+  @@map("collections")
+}
+
+model Product {
+  id               String      @id @default(uuid())
+  slug             String      @unique
+  name             String
+  categoryId       String      @map("category_id")
+  category         Category    @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  collectionId     String?     @map("collection_id")
+  collection       Collection? @relation(fields: [collectionId], references: [id], onDelete: SetNull)
+  price            String      // Display price, e.g. "₹4,499" or "4499"
+  originalPrice    String?     @map("original_price") // e.g. "₹5,999"
+  rating           Float       @default(5.0)
+  image            String      @db.Text // Main featured image URL (ImageKit/CDN)
+  images           Json        // Array of image URLs (ImageKit/CDN)
+  description      String      @db.Text
+  shortDescription String      @map("short_description") @db.Text
+  specifications   Json?       // Key-value object (Material, Thread Count, Weave, Sizes, etc.)
+  features         Json?       // String array of feature bullet points
+  careInstructions Json?       @map("care_instructions") // String array of care steps
+  packageIncludes  Json?       @map("package_includes")  // String array of package contents
+  inStock          Boolean     @default(true) @map("in_stock")
+  isFeatured       Boolean     @default(false) @map("is_featured")
+  displayOrder     Int         @default(0) @map("display_order")
+  createdAt        DateTime    @default(now()) @map("created_at")
+  updatedAt        DateTime    @updatedAt @map("updated_at")
+
+  @@index([categoryId])
+  @@index([collectionId])
+  @@map("products")
+}
+
+model Inquiry {
+  id          String   @id @default(uuid())
+  name        String
+  email       String
+  phone       String
+  company     String?
+  enquiryType String   @default("retail") @map("enquiry_type") // retail, hotel, wholesale, designer, general
+  message     String   @db.Text
+  productId   String?  @map("product_id")
+  productName String?  @map("product_name")
+  status      String   @default("NEW") // NEW, CONTACTED, RESOLVED, ARCHIVED
+  notes       String?  @db.Text
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("inquiries")
+}

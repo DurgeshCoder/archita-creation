@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Star, MessageSquare, ShieldCheck, Award, Sparkles } from "lucide-react";
-import { PRODUCTS } from "@/constants";
+import { getAllProducts, getProductById } from "@/lib/data-service";
 import PageHeader from "@/components/PageHeader";
 import ProductGallery from "@/components/ProductGallery";
 import ProductCard from "@/components/ProductCard";
@@ -11,9 +11,10 @@ interface PageProps {
   params: Promise<{ id: string }>;
 }
 
-// Generate static routes at build time for SSG
-export function generateStaticParams() {
-  return PRODUCTS.map((product) => ({
+// Generate static routes at build time for known products
+export async function generateStaticParams() {
+  const products = await getAllProducts();
+  return products.map((product) => ({
     id: product.id,
   }));
 }
@@ -21,7 +22,7 @@ export function generateStaticParams() {
 // Dynamic SEO metadata generation
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
-  const product = PRODUCTS.find((p) => p.id === resolvedParams.id);
+  const product = await getProductById(resolvedParams.id);
   if (!product) {
     return {
       title: "Product Not Found",
@@ -51,14 +52,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ProductPage({ params }: PageProps) {
   const resolvedParams = await params;
-  const product = PRODUCTS.find((p) => p.id === resolvedParams.id);
+  const product = await getProductById(resolvedParams.id);
 
   if (!product) {
     notFound();
   }
 
+  const allProducts = await getAllProducts();
   // Related products (same category, max 3)
-  const relatedProducts = PRODUCTS.filter(
+  const relatedProducts = allProducts.filter(
     (p) => p.category === product.category && p.id !== product.id
   ).slice(0, 3);
 

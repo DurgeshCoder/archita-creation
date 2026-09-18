@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 import ProductCard from "@/components/ProductCard";
-import { PRODUCTS } from "@/constants";
+import { getProductsByCategory } from "@/lib/data-service";
 
 export const metadata: Metadata = {
   title: "Premium Bedsheets Collection",
   description: "Browse Giza long-staple cotton bedsheets in high thread counts and elegant sateen and percale weaves. Handcrafted details.",
 };
 
-export default function BedsheetsCategory() {
-  const bedsheets = PRODUCTS.filter((p) => p.category === "bedsheets");
+export default async function BedsheetsCategory() {
+  const bedsheets = await getProductsByCategory("bedsheets");
   const breadcrumbs = [{ name: "Collections", href: "/collections" }, { name: "Bedsheets" }];
 
   return (

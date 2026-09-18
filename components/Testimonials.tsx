@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Star, Quote } from "lucide-react";
+import { Star, Quote, CheckCircle } from "lucide-react";
 import { TESTIMONIALS } from "@/constants";
 import SectionTitle from "./SectionTitle";
 
@@ -12,49 +12,47 @@ export default function Testimonials() {
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <SectionTitle
           title="What Our Clients Say"
-          subtitle="Testimonials"
-          description="Read experiences from the interior designers, boutique hotel partners, and retailers who trust Archita Creation for high-standard linens."
+          subtitle="Verified Feedback"
+          description="Read reviews from boutique hotel owners, interior design studios, and retail homeowners who rely on Archita Creation linens for supreme comfort."
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {TESTIMONIALS.map((item, index) => (
             <motion.div
               key={item.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-accent/20 dark:bg-luxury-dark/40 border border-luxury-dark/5 dark:border-white/5 p-8 rounded-3xl relative flex flex-col justify-between h-full shadow-sm hover:shadow-md transition-shadow"
+              transition={{ duration: 0.5, delay: index * 0.08 }}
+              className="bg-neutral-50/70 dark:bg-neutral-900/50 border border-neutral-200/60 dark:border-neutral-800 p-7 rounded-3xl relative flex flex-col justify-between h-full shadow-xs hover:shadow-md transition-all group"
             >
               <div>
-                {/* Quote Icon */}
-                <div className="text-secondary/20 mb-6">
-                  <Quote className="w-10 h-10 fill-current" />
-                </div>
-
-                {/* Rating */}
-                <div className="flex items-center space-x-1 mb-4">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`w-4 h-4 ${
-                        i < Math.floor(item.rating)
-                          ? "text-secondary fill-current"
-                          : "text-luxury-dark/10 dark:text-white/10"
-                      }`}
-                    />
-                  ))}
+                {/* Rating & Quote Header */}
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center space-x-1">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`w-3.5 h-3.5 ${
+                          i < Math.floor(item.rating)
+                            ? "text-secondary fill-current"
+                            : "text-neutral-300 dark:text-neutral-700"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <Quote className="w-6 h-6 text-secondary/30 fill-current" />
                 </div>
 
                 {/* Review Copy */}
-                <p className="font-sans text-xs sm:text-sm text-luxury-dark/80 dark:text-luxury-light/80 leading-relaxed font-light mb-8 italic">
+                <p className="font-sans text-xs sm:text-sm text-luxury-dark/80 dark:text-neutral-300 leading-relaxed font-light mb-6 italic">
                   &ldquo;{item.review}&rdquo;
                 </p>
               </div>
 
               {/* Reviewer Details */}
-              <div className="flex items-center space-x-4 border-t border-luxury-dark/5 dark:border-white/5 pt-4">
-                <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0">
+              <div className="flex items-center space-x-3.5 border-t border-neutral-200/60 dark:border-neutral-800 pt-4">
+                <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 border border-secondary/20">
                   <Image
                     src={item.image}
                     alt={item.name}
@@ -64,11 +62,14 @@ export default function Testimonials() {
                   />
                 </div>
                 <div>
-                  <h4 className="font-serif text-sm font-bold text-primary dark:text-secondary-light">
-                    {item.name}
-                  </h4>
-                  <p className="text-[10px] text-luxury-dark/50 dark:text-luxury-light/50 font-light mt-0.5 leading-none">
-                    {item.role}, <span className="font-semibold text-secondary">{item.company}</span>
+                  <div className="flex items-center gap-1">
+                    <h4 className="font-serif text-sm font-bold text-luxury-dark dark:text-luxury-light">
+                      {item.name}
+                    </h4>
+                    <CheckCircle className="w-3 h-3 text-secondary" />
+                  </div>
+                  <p className="text-[11px] text-neutral-500 font-light mt-0.5 leading-none">
+                    {item.role} • <span className="font-semibold text-secondary">{item.company}</span>
                   </p>
                 </div>
               </div>

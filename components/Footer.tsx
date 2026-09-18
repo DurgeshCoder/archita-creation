@@ -1,174 +1,165 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Mail, MapPin, Phone, Clock, Send, Check } from "lucide-react";
+import { Mail, MapPin, Phone, Clock, Send, Check, ShieldCheck } from "lucide-react";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const [footerCategories, setFooterCategories] = useState<Array<{ name: string; href: string }>>([
+    { name: "Luxury Bedsheets (400-1000 TC)", href: "/category/bedsheets" },
+    { name: "Microfiber Comforters & Duvets", href: "/category/comforters" },
+    { name: "AC & Coral Fleece Blankets", href: "/category/blankets" },
+    { name: "Handcrafted Mulmul Dohars", href: "/category/dohars" },
+    { name: "Master Suite Bedding Sets", href: "/category/bedding-sets" },
+  ]);
+
+  useEffect(() => {
+    fetch("/api/categories")
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          const active = data.filter((c: any) => c.isActive !== false);
+          if (active.length > 0) {
+            setFooterCategories(
+              active.map((c: any) => ({
+                name: c.name,
+                href: `/category/${c.slug}`,
+              }))
+            );
+          }
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     if (email.trim()) {
       setSubscribed(true);
       setEmail("");
-      setTimeout(() => setSubscribed(false), 5000);
+      setTimeout(() => setSubscribed(false), 4000);
     }
   };
 
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-luxury-dark text-white pt-20 pb-8 border-t border-white/5">
+    <footer className="bg-neutral-950 text-white pt-20 pb-10 border-t border-neutral-800/80">
       <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
         {/* Brand Information */}
-        <div className="flex flex-col space-y-6">
-          <Link href="/" className="flex flex-col items-start leading-none group">
-            <span className="font-serif text-3xl font-bold tracking-widest uppercase text-secondary">
-              Archita
-            </span>
-            <span className="font-sans text-xs tracking-[0.25em] text-white/50 uppercase mt-0.5 pl-0.5">
-              Creation
-            </span>
-          </Link>
-          <p className="text-sm text-white/60 leading-relaxed font-sans font-light">
-            Manufacturers and exporters of premium bedding collections, Giza cotton bedsheets, comforters, AC blankets, and traditional dohars. Designed for timeless elegance and luxury comfort.
-          </p>
-          <div className="flex space-x-4 pt-1">
-            <Link
-              href="https://www.instagram.com/archita_creation_offical"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-secondary hover:bg-white/10 hover:border-secondary transition-all"
-              aria-label="Instagram Profile"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="w-4 h-4"
-              >
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-            </Link>
-          </div>
-          <div className="flex flex-col space-y-3 pt-2 text-sm text-white/70">
-            <div className="flex items-start">
-              <MapPin className="w-5 h-5 text-secondary mr-3 shrink-0 mt-0.5" />
-              <span>Archita House, Indra Nagar, Lucknow, Uttar Pradesh - 226016, India</span>
+        <div className="flex flex-col space-y-5">
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-secondary to-primary-dark flex items-center justify-center text-white font-serif font-bold text-xl shadow-md">
+              A
             </div>
-            <div className="flex items-center">
-              <Phone className="w-4 h-4 text-secondary mr-4 shrink-0" />
+            <div className="flex flex-col leading-tight">
+              <span className="font-serif text-xl font-bold tracking-tight text-white group-hover:text-secondary transition-colors">
+                Archita Creation
+              </span>
+              <span className="font-sans text-[10px] tracking-[0.2em] text-neutral-400 uppercase">
+                Luxury Bedding & Linens
+              </span>
+            </div>
+          </Link>
+
+          <p className="text-xs text-neutral-400 leading-relaxed font-light">
+            Premier Indian textile house based in Panipat. We weave, stitch, and export 100% Giza cotton bedsheets, microfiber comforters, AC blankets, and heirloom mulmul dohars.
+          </p>
+
+          <div className="flex flex-col space-y-2.5 pt-2 text-xs text-neutral-300">
+            <div className="flex items-start gap-2.5">
+              <MapPin className="w-4 h-4 text-secondary shrink-0 mt-0.5" />
+              <span>Archita House, Indira Nagar, Lucknow, Uttar Pradesh - 226016, India</span>
+            </div>
+            <div className="flex items-center gap-2.5">
+              <Phone className="w-4 h-4 text-secondary shrink-0" />
               <Link href="tel:+919795872419" className="hover:text-secondary transition-colors">
                 +91 97958 72419
               </Link>
             </div>
-            <div className="flex items-center">
-              <Mail className="w-4 h-4 text-secondary mr-4 shrink-0" />
+            <div className="flex items-center gap-2.5">
+              <Mail className="w-4 h-4 text-secondary shrink-0" />
               <Link href="mailto:info@architacreation.com" className="hover:text-secondary transition-colors">
                 info@architacreation.com
               </Link>
             </div>
-            <div className="flex items-center">
-              <Clock className="w-4 h-4 text-secondary mr-4 shrink-0" />
-              <span>Mon - Sat: 9:00 AM - 7:00 PM</span>
+            <div className="flex items-center gap-2.5 text-neutral-400">
+              <Clock className="w-4 h-4 text-secondary shrink-0" />
+              <span>Mon - Sat: 9:00 AM - 7:00 PM IST</span>
             </div>
           </div>
         </div>
 
-        {/* Directory Links */}
-        <div className="grid grid-cols-2 gap-8 lg:pl-8 lg:col-span-2">
-          {/* Product Categories */}
-          <div>
-            <h3 className="font-serif text-lg font-semibold tracking-wider text-secondary mb-6">
-              Our Products
-            </h3>
-            <ul className="space-y-3 text-sm text-white/60">
-              <li>
-                <Link href="/bedsheets" className="hover:text-secondary hover:translate-x-1 inline-block transition-all">
-                  Bedsheets
+        {/* Product Categories */}
+        <div className="lg:pl-6">
+          <h3 className="font-serif text-sm font-bold uppercase tracking-widest text-secondary mb-5">
+            Bedding Lines
+          </h3>
+          <ul className="space-y-2.5 text-xs text-neutral-400">
+            {footerCategories.slice(0, 5).map((cat) => (
+              <li key={cat.name}>
+                <Link href={cat.href} className="hover:text-white transition-colors">
+                  {cat.name}
                 </Link>
               </li>
-              <li>
-                <Link href="/comforters" className="hover:text-secondary hover:translate-x-1 inline-block transition-all">
-                  Comforters
-                </Link>
-              </li>
-              <li>
-                <Link href="/blankets" className="hover:text-secondary hover:translate-x-1 inline-block transition-all">
-                  AC Blankets
-                </Link>
-              </li>
-              <li>
-                <Link href="/dohars" className="hover:text-secondary hover:translate-x-1 inline-block transition-all">
-                  Dohars
-                </Link>
-              </li>
-              <li>
-                <Link href="/bedding-sets" className="hover:text-secondary hover:translate-x-1 inline-block transition-all">
-                  Bedding Sets
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Quick Links & Info */}
-          <div>
-            <h3 className="font-serif text-lg font-semibold tracking-wider text-secondary mb-6">
-              Company
-            </h3>
-            <ul className="space-y-3 text-sm text-white/60">
-              <li>
-                <Link href="/about" className="hover:text-secondary hover:translate-x-1 inline-block transition-all">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link href="/collections" className="hover:text-secondary hover:translate-x-1 inline-block transition-all">
-                  Collections
-                </Link>
-              </li>
-              <li>
-                <Link href="/gallery" className="hover:text-secondary hover:translate-x-1 inline-block transition-all">
-                  Design Gallery
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog" className="hover:text-secondary hover:translate-x-1 inline-block transition-all">
-                  Insights & Blog
-                </Link>
-              </li>
-              <li>
-                <Link href="/privacy" className="hover:text-secondary hover:translate-x-1 inline-block transition-all">
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link href="/terms" className="hover:text-secondary hover:translate-x-1 inline-block transition-all">
-                  Terms of Service
-                </Link>
-              </li>
-            </ul>
-          </div>
+            ))}
+            <li>
+              <Link href="/collections" className="hover:text-white transition-colors text-secondary font-medium">
+                All Signature Collections →
+              </Link>
+            </li>
+          </ul>
         </div>
 
-        {/* Newsletter & Map */}
-        <div className="flex flex-col space-y-6">
+        {/* Quick Links */}
+        <div>
+          <h3 className="font-serif text-sm font-bold uppercase tracking-widest text-secondary mb-5">
+            Company
+          </h3>
+          <ul className="space-y-2.5 text-xs text-neutral-400">
+            <li>
+              <Link href="/about" className="hover:text-white transition-colors">
+                About Our Heritage
+              </Link>
+            </li>
+            <li>
+              <Link href="/gallery" className="hover:text-white transition-colors">
+                Visual Gallery
+              </Link>
+            </li>
+            <li>
+              <Link href="/blog" className="hover:text-white transition-colors">
+                Fabric Care & Sleep Blog
+              </Link>
+            </li>
+            <li>
+              <Link href="/contact" className="hover:text-white transition-colors">
+                Contact & Trade Inquiries
+              </Link>
+            </li>
+            <li>
+              <Link href="/privacy" className="hover:text-white transition-colors">
+                Privacy Policy
+              </Link>
+            </li>
+            <li>
+              <Link href="/terms" className="hover:text-white transition-colors">
+                Terms of Service
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Newsletter & Sourcing */}
+        <div className="flex flex-col space-y-5">
           <div>
-            <h3 className="font-serif text-lg font-semibold tracking-wider text-secondary mb-4">
-              Join Our Club
+            <h3 className="font-serif text-sm font-bold uppercase tracking-widest text-secondary mb-3">
+              Trade & Retail Catalog
             </h3>
-            <p className="text-xs text-white/50 leading-relaxed mb-4">
-              Subscribe to receive exclusive insights on bedroom styling, fabric care guides, and catalog collections launches.
+            <p className="text-xs text-neutral-400 leading-relaxed font-light mb-4">
+              Subscribe for seasonal collection releases, hotel sourcing brochures, and fabric care recommendations.
             </p>
             <form onSubmit={handleSubscribe} className="flex relative">
               <input
@@ -176,51 +167,45 @@ export default function Footer() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Your luxury email"
-                className="w-full bg-white/5 border border-white/10 rounded-full px-5 py-3 text-xs focus:outline-none focus:border-secondary transition-all pr-12 text-white font-sans placeholder:text-white/30"
+                placeholder="Enter your email address"
+                className="w-full bg-neutral-900 border border-neutral-800 rounded-full px-4 py-2.5 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-secondary transition-all pr-10"
               />
               <button
                 type="submit"
                 className="absolute right-1 top-1 bottom-1 aspect-square bg-secondary hover:bg-secondary-dark text-white rounded-full flex items-center justify-center transition-colors"
                 aria-label="Subscribe"
               >
-                {subscribed ? <Check className="w-3.5 h-3.5" /> : <Send className="w-3.5 h-3.5" />}
+                {subscribed ? <Check className="w-3 h-3" /> : <Send className="w-3 h-3" />}
               </button>
             </form>
             {subscribed && (
-              <p className="text-xs text-green-400 mt-2 animate-fade-in font-medium">
-                Thank you! Welcome to Archita Luxury.
+              <p className="text-xs text-emerald-400 mt-2 font-medium">
+                Thank you! We have added you to our luxury catalog list.
               </p>
             )}
           </div>
 
-          {/* Styled Google Maps Iframe */}
-          <div className="rounded-xl overflow-hidden h-32 w-full border border-white/10 relative group">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14234.619086395383!2d80.98565158652342!3d26.882705096538965!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399be2a6ab06d7ef%3A0xc38ddf7e268a86a6!2sIndira%20Nagar%2C%20Lucknow%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
-              width="100%"
-              height="100%"
-              style={{ border: 0, filter: "grayscale(100%) invert(90%) contrast(95%)" }}
-              allowFullScreen={false}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Archita Creation Location Map"
-            />
-            <div className="absolute inset-0 bg-primary/10 pointer-events-none transition-opacity duration-300 group-hover:opacity-0" />
+          <div className="pt-2">
+            <Link
+              href="/admin/login"
+              className="inline-flex items-center gap-1.5 text-[11px] text-neutral-500 hover:text-neutral-300 transition-colors"
+            >
+              <ShieldCheck className="w-3.5 h-3.5 text-secondary" /> Authorized Admin CMS Login
+            </Link>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between text-xs text-white/40 gap-4">
-        <span>© {currentYear} Archita Creation. All Rights Reserved. Co-crafted with Luxury.</span>
+      <div className="max-w-7xl mx-auto px-6 md:px-12 pt-8 border-t border-neutral-800/80 flex flex-col md:flex-row items-center justify-between text-xs text-neutral-500 gap-4">
+        <span>© {currentYear} Archita Creation. All rights reserved. Panipat Textile Craftsmanship.</span>
         <div className="flex space-x-6">
-          <Link href="/privacy" className="hover:text-secondary transition-colors">
-            Privacy Policy
+          <Link href="/privacy" className="hover:text-neutral-300 transition-colors">
+            Privacy
           </Link>
-          <Link href="/terms" className="hover:text-secondary transition-colors">
-            Terms of Use
+          <Link href="/terms" className="hover:text-neutral-300 transition-colors">
+            Terms
           </Link>
-          <Link href="/sitemap.xml" className="hover:text-secondary transition-colors">
+          <Link href="/sitemap.xml" className="hover:text-neutral-300 transition-colors">
             Sitemap
           </Link>
         </div>

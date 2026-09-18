@@ -61,10 +61,24 @@ export default function Contact() {
 
       const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(messageText)}`;
       
+      // Save inquiry in background to database
+      fetch("/api/inquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          company: formData.company,
+          enquiryType: formData.enquiryType,
+          message: formData.message,
+        }),
+      }).catch((err) => console.error("Inquiry database save error:", err));
+
       // Open in a new tab
       window.open(whatsappUrl, "_blank");
 
-      // Simulate API submit
+      // Set submit feedback
       setSubmitted(true);
       setFormData({
         name: "",

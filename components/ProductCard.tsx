@@ -7,13 +7,18 @@ import { motion } from "framer-motion";
 import { Product } from "@/constants";
 
 interface ProductCardProps {
-  product: Product;
+  product: Product | any;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const productId = product.slug || product.id;
+  const categoryLabel = product.categoryLabel || product.category?.name || "Bedsheets";
+  const collectionName = product.collection?.name || product.collection || "Signature Collection";
+  const ratingValue = Number(product.rating) || 5.0;
+
   const whatsappNumber = "919795872419";
   const whatsappMessage = encodeURIComponent(
-    `Hello Archita Creation, I am interested in purchasing or enquiring about the "${product.name}" from your "${product.collection}". Please share pricing and stock availability.`
+    `Hello Archita Creation, I am interested in purchasing or enquiring about the "${product.name}" from your "${collectionName}". Please share pricing and stock availability.`
   );
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
@@ -29,7 +34,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* Product Image Panel */}
         <div className="relative h-[280px] w-full overflow-hidden bg-accent/10">
           <Image
-            src={product.image}
+            src={product.image || "/images/archita_bedding_01.jpg"}
             alt={product.name}
             fill
             sizes="(max-width: 768px) 100vw, 33vw"
@@ -37,17 +42,17 @@ export default function ProductCard({ product }: ProductCardProps) {
           />
           {/* Badge */}
           <div className="absolute top-4 left-4 bg-primary/95 text-white text-[9px] font-semibold tracking-wider uppercase px-2.5 py-1.5 rounded-full">
-            {product.categoryLabel}
+            {categoryLabel}
           </div>
         </div>
 
         {/* Product Details */}
         <div className="p-6">
           <span className="text-[10px] text-secondary font-semibold uppercase tracking-widest">
-            {product.collection}
+            {collectionName}
           </span>
           <h3 className="font-serif text-lg font-bold text-primary dark:text-secondary-light leading-snug mt-1 mb-2 hover:text-secondary transition-colors">
-            <Link href={`/products/${product.id}`}>{product.name}</Link>
+            <Link href={`/products/${productId}`}>{product.name}</Link>
           </h3>
 
           {/* Rating */}
@@ -56,14 +61,14 @@ export default function ProductCard({ product }: ProductCardProps) {
               <Star
                 key={i}
                 className={`w-3.5 h-3.5 ${
-                  i < Math.floor(product.rating)
+                  i < Math.floor(ratingValue)
                     ? "text-secondary fill-current"
                     : "text-luxury-dark/10 dark:text-white/10"
                 }`}
               />
             ))}
             <span className="text-[10px] text-luxury-dark/50 dark:text-luxury-light/50 pl-1 mt-0.5">
-              ({product.rating.toFixed(1)})
+              ({ratingValue.toFixed(1)})
             </span>
           </div>
 

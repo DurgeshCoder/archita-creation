@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown, Phone, Sun, Moon } from "lucide-react";
+import { Menu, X, ChevronDown, Phone, Sun, Moon, Sparkles, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { COLLECTIONS } from "@/constants";
 
@@ -12,6 +12,14 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [mounted, setMounted] = useState(false);
+  const [categoryList, setCategoryList] = useState<Array<{ name: string; href: string; desc: string }>>([
+    { name: "Luxury Bedsheets", href: "/category/bedsheets", desc: "400-1000 TC Giza & Percale" },
+    { name: "Microfiber Comforters", href: "/category/comforters", desc: "Hypoallergenic all-season duvets" },
+    { name: "AC & Winter Blankets", href: "/category/blankets", desc: "Featherweight coral fleece" },
+    { name: "Handcrafted Dohars", href: "/category/dohars", desc: "Pure mulmul & Sanganeri block print" },
+    { name: "Complete Bedding Sets", href: "/category/bedding-sets", desc: "Curated 5 & 7-piece master suites" },
+  ]);
+  const [collectionList, setCollectionList] = useState<any[]>(COLLECTIONS);
   const pathname = usePathname();
 
   // Scroll detection
@@ -19,7 +27,6 @@ export default function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
       
-      // Update scroll progress indicator width
       const scrollProgress = document.getElementById("scroll-progress");
       if (scrollProgress) {
         const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -27,24 +34,54 @@ export default function Navbar() {
         scrollProgress.style.width = `${progress}%`;
       }
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Theme setup
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setMounted(true);
-      const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
-      if (savedTheme) {
-        setTheme(savedTheme);
-        document.documentElement.classList.toggle("dark", savedTheme === "dark");
-      } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        setTheme("dark");
-        document.documentElement.classList.add("dark");
-      }
-    }, 0);
-    return () => clearTimeout(timer);
+    setMounted(true);
+    const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
+    if (savedTheme) {
+      setTheme(savedTheme);
+      document.documentElement.classList.toggle("dark", savedTheme === "dark");
+    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      setTheme("dark");
+      document.documentElement.classList.add("dark");
+    }
+  }, []);
+
+  // Fetch dynamic categories and collections from database
+  useEffect(() => {
+    fetch("/api/categories")
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          const active = data.filter((c: any) => c.isActive !== false);
+          if (active.length > 0) {
+            setCategoryList(
+              active.map((c: any) => ({
+                name: c.name,
+                href: `/category/${c.slug}`,
+                desc: c.description || "Luxury home textile collection",
+              }))
+            );
+          }
+        }
+      })
+      .catch(() => {});
+
+    fetch("/api/collections")
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          const active = data.filter((c: any) => c.isActive !== false);
+          if (active.length > 0) {
+            setCollectionList(active);
+          }
+        }
+      })
+      .catch(() => {});
   }, []);
 
   const toggleTheme = () => {
@@ -56,15 +93,12 @@ export default function Navbar() {
 
   // Close mobile drawer on route change
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsOpen(false);
-    }, 0);
-    return () => clearTimeout(timer);
+    setIsOpen(false);
   }, [pathname]);
 
   const navLinks = [
     { name: "Home", href: "/" },
-    { name: "About Us", href: "/about" },
+    { name: "About", href: "/about" },
     { name: "Collections", href: "/collections", hasMega: true },
     { name: "Products", href: "#", hasSub: true },
     { name: "Gallery", href: "/gallery" },
@@ -72,95 +106,97 @@ export default function Navbar() {
     { name: "Contact", href: "/contact" },
   ];
 
-  const productCategories = [
-    { name: "Bedsheets", href: "/bedsheets" },
-    { name: "Comforters", href: "/comforters" },
-    { name: "AC Blankets", href: "/blankets" },
-    { name: "Dohars", href: "/dohars" },
-    { name: "Complete Bedding Sets", href: "/bedding-sets" },
-  ];
-
   return (
     <>
-      {/* Scroll Progress Indicator */}
-      <div id="scroll-progress" />
+      {/* Scroll Progress Bar */}
+      <div
+        id="scroll-progress"
+        className="fixed top-0 left-0 h-0.5 bg-gradient-to-r from-secondary to-primary z-50 transition-all duration-150"
+        style={{ width: "0%" }}
+      />
 
       <header
         className={cn(
-          "fixed top-0 left-0 w-full z-50 transition-all duration-500",
+          "fixed top-0 left-0 w-full z-40 transition-all duration-300",
           scrolled
-            ? "glass-nav shadow-lg py-4"
-            : "bg-transparent py-4 lg:py-6 border-b border-white/10"
+            ? "bg-white/95 dark:bg-luxury-dark/95 backdrop-blur-xl border-b border-neutral-200/80 dark:border-white/10 shadow-sm py-3.5"
+            : "bg-white/80 dark:bg-luxury-dark/80 backdrop-blur-md border-b border-neutral-200/50 dark:border-white/10 py-4.5"
         )}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-          {/* Logo */}
+          {/* Brand Logo */}
           <Link
             href="/"
-            className="flex flex-col items-start leading-none group"
+            className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary rounded-lg"
           >
-            <span className="font-serif text-2xl md:text-3xl font-bold tracking-widest uppercase transition-colors duration-300 text-primary dark:text-secondary group-hover:text-secondary-dark">
-              Archita
-            </span>
-            <span className="font-sans text-xs md:text-sm tracking-[0.25em] text-luxury-dark/60 dark:text-luxury-light/60 uppercase pl-0.5 mt-0.5">
-              Creation
-            </span>
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-secondary to-primary-dark flex items-center justify-center text-white font-serif font-bold text-xl shadow-md shadow-secondary/20 shrink-0 group-hover:scale-105 transition-transform">
+              A
+            </div>
+            <div className="flex flex-col items-start leading-tight">
+              <span className="font-serif text-xl md:text-2xl font-bold tracking-tight text-primary dark:text-secondary-light group-hover:text-secondary transition-colors">
+                Archita Creation
+              </span>
+              <span className="font-sans text-[10px] tracking-[0.2em] text-neutral-500 dark:text-neutral-400 uppercase font-semibold">
+                Luxury Bedding & Linens
+              </span>
+            </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
+          {/* Desktop Navigation Links */}
+          <nav className="hidden lg:flex items-center space-x-1" aria-label="Main Navigation">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
 
               if (link.hasMega) {
                 return (
-                  <div
-                    key={link.name}
-                    className="relative group"
-                  >
-                    <button
+                  <div key={link.name} className="relative group">
+                    <Link
+                      href="/collections"
                       className={cn(
-                        "flex items-center text-sm font-medium tracking-wide uppercase transition-colors hover:text-secondary py-2",
-                        isActive ? "text-secondary" : "text-luxury-dark dark:text-luxury-light"
+                        "flex items-center px-3.5 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider transition-colors",
+                        pathname.startsWith("/collections")
+                          ? "text-secondary font-bold"
+                          : "text-luxury-dark/80 dark:text-neutral-200 hover:text-secondary dark:hover:text-secondary"
                       )}
                     >
                       {link.name}
-                      <ChevronDown className="ml-1 w-4 h-4 transition-transform group-hover:rotate-180" />
-                    </button>
-                    {/* Mega Menu */}
-                    <div
-                      className={cn(
-                        "absolute top-full left-1/2 -translate-x-1/2 w-[800px] p-8 rounded-2xl glass-panel shadow-2xl transition-all duration-300 opacity-0 invisible translate-y-4 pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:pointer-events-auto flex gap-8",
-                      )}
-                    >
-                      <div className="w-1/3 border-r border-luxury-dark/10 dark:border-luxury-light/10 pr-6 flex flex-col justify-between">
-                        <div>
-                          <h3 className="font-serif text-xl font-bold text-primary dark:text-secondary mb-2">
+                      <ChevronDown className="ml-1 w-3.5 h-3.5 transition-transform group-hover:rotate-180" />
+                    </Link>
+
+                    {/* Mega Menu Dropdown */}
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 w-[720px] p-6 rounded-2xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-2xl transition-all duration-200 opacity-0 invisible translate-y-3 pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:pointer-events-auto flex gap-6">
+                      <div className="w-2/5 border-r border-neutral-200 dark:border-neutral-800 pr-6 flex flex-col justify-between">
+                        <div className="space-y-2">
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-secondary/10 text-secondary text-[10px] font-bold uppercase tracking-wider">
+                            <Sparkles className="w-3 h-3" /> Designer Themes
+                          </span>
+                          <h3 className="font-serif text-lg font-bold text-primary dark:text-secondary-light">
                             Signature Collections
                           </h3>
-                          <p className="text-xs text-luxury-dark/60 dark:text-luxury-light/60 leading-relaxed mb-4">
-                            Explore our meticulously crafted bedding themes, designed to elevate your sleep.
+                          <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed font-light">
+                            Meticulously engineered long-staple cotton and heirloom block-print suites designed for exquisite bedroom comfort.
                           </p>
                         </div>
                         <Link
                           href="/collections"
-                          className="inline-flex items-center text-xs font-semibold text-secondary hover:text-secondary-dark uppercase tracking-wider"
+                          className="inline-flex items-center text-xs font-semibold text-secondary hover:text-secondary-dark uppercase tracking-wider group/cta mt-4"
                         >
-                          View All Collections →
+                          View All Collections <ArrowRight className="w-3.5 h-3.5 ml-1 transition-transform group-hover/cta:translate-x-1" />
                         </Link>
                       </div>
-                      <div className="w-2/3 grid grid-cols-2 gap-4 max-h-[250px] overflow-y-auto pr-2 no-scrollbar">
-                        {COLLECTIONS.map((col) => (
+
+                      <div className="w-3/5 grid grid-cols-2 gap-3 max-h-[260px] overflow-y-auto pr-1">
+                        {collectionList.map((col) => (
                           <Link
-                            key={col.id}
+                            key={col.id || col.name}
                             href={`/collections?search=${encodeURIComponent(col.name)}`}
-                            className="flex flex-col p-2.5 rounded-lg hover:bg-primary/5 dark:hover:bg-secondary/5 transition-colors group/col"
+                            className="flex flex-col p-3 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors group/item"
                           >
-                            <span className="font-medium text-sm text-luxury-dark dark:text-luxury-light group-hover/col:text-secondary transition-colors">
+                            <span className="font-semibold text-xs text-luxury-dark dark:text-neutral-200 group-hover/item:text-secondary transition-colors line-clamp-1">
                               {col.name}
                             </span>
-                            <span className="text-xs text-luxury-dark/50 dark:text-luxury-light/50 line-clamp-1 mt-0.5">
-                              {col.theme}
+                            <span className="text-[11px] text-neutral-500 dark:text-neutral-400 line-clamp-1 mt-0.5">
+                              {col.theme || col.description || "Luxury Collection"}
                             </span>
                           </Link>
                         ))}
@@ -174,20 +210,29 @@ export default function Navbar() {
                 return (
                   <div key={link.name} className="relative group">
                     <button
-                      className="flex items-center text-sm font-medium tracking-wide uppercase transition-colors hover:text-secondary py-2 text-luxury-dark dark:text-luxury-light"
+                      className={cn(
+                        "flex items-center px-3.5 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider transition-colors",
+                        "text-luxury-dark/80 dark:text-neutral-200 hover:text-secondary dark:hover:text-secondary cursor-pointer"
+                      )}
                     >
                       {link.name}
-                      <ChevronDown className="ml-1 w-4 h-4 transition-transform group-hover:rotate-180" />
+                      <ChevronDown className="ml-1 w-3.5 h-3.5 transition-transform group-hover:rotate-180" />
                     </button>
-                    {/* Dropdown Menu */}
-                    <div className="absolute top-full left-0 w-56 p-4 rounded-xl glass-panel shadow-xl transition-all duration-300 opacity-0 invisible translate-y-4 pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:pointer-events-auto flex flex-col space-y-2">
-                      {productCategories.map((sub) => (
+
+                    {/* Products Submenu */}
+                    <div className="absolute top-full left-0 w-64 p-3 rounded-2xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-2xl transition-all duration-200 opacity-0 invisible translate-y-3 pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:pointer-events-auto space-y-1 max-h-[380px] overflow-y-auto">
+                      {categoryList.map((sub) => (
                         <Link
                           key={sub.name}
                           href={sub.href}
-                          className="px-3 py-2 rounded-lg text-sm text-luxury-dark dark:text-luxury-light hover:bg-primary/5 dark:hover:bg-secondary/5 hover:text-secondary transition-colors"
+                          className="flex flex-col px-3 py-2 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors group/sub"
                         >
-                          {sub.name}
+                          <span className="text-xs font-semibold text-luxury-dark dark:text-neutral-200 group-hover/sub:text-secondary transition-colors">
+                            {sub.name}
+                          </span>
+                          <span className="text-[10px] text-neutral-500 line-clamp-1">
+                            {sub.desc}
+                          </span>
                         </Link>
                       ))}
                     </div>
@@ -200,8 +245,10 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   className={cn(
-                    "text-sm font-medium tracking-wide uppercase transition-colors hover:text-secondary py-2",
-                    isActive ? "text-secondary font-semibold" : "text-luxury-dark dark:text-luxury-light"
+                    "px-3.5 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider transition-colors",
+                    isActive
+                      ? "text-secondary font-bold"
+                      : "text-luxury-dark/80 dark:text-neutral-200 hover:text-secondary dark:hover:text-secondary"
                   )}
                 >
                   {link.name}
@@ -210,146 +257,116 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Action Buttons */}
-          <div className="hidden lg:flex items-center space-x-6">
-            {/* Dark Mode Switch */}
+          {/* Action CTAs & Theme Switcher */}
+          <div className="hidden lg:flex items-center space-x-4">
+            {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full hover:bg-primary/5 dark:hover:bg-secondary/5 text-luxury-dark dark:text-luxury-light transition-colors min-w-[36px] min-h-[36px] flex items-center justify-center"
-              aria-label="Toggle Theme"
+              className="p-2 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 text-luxury-dark dark:text-luxury-light transition-colors min-w-[36px] min-h-[36px] flex items-center justify-center cursor-pointer"
+              aria-label={theme === "light" ? "Switch to Dark Mode" : "Switch to Light Mode"}
+              title={theme === "light" ? "Switch to Dark Mode" : "Switch to Light Mode"}
             >
               {mounted ? (
-                theme === "light" ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />
+                theme === "light" ? (
+                  <Moon className="w-4 h-4 text-neutral-700" />
+                ) : (
+                  <Sun className="w-4 h-4 text-amber-400" />
+                )
               ) : (
-                <div className="w-5 h-5" />
+                <div className="w-4 h-4" />
               )}
             </button>
 
             {/* Request Catalogue CTA */}
             <Link
               href="/contact?ref=catalogue"
-              className="bg-primary hover:bg-primary-dark text-white px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-widest transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5"
+              className="px-5 py-2.5 bg-primary hover:bg-primary-dark text-white text-xs font-semibold rounded-full uppercase tracking-wider shadow-sm hover:shadow-md transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
               Request Catalogue
             </Link>
           </div>
 
           {/* Mobile Right Controls */}
-          <div className="flex lg:hidden items-center space-x-4">
-            {/* Dark Mode Switch (Mobile) */}
+          <div className="flex lg:hidden items-center space-x-2">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full hover:bg-primary/5 dark:hover:bg-secondary/5 text-luxury-dark dark:text-luxury-light transition-colors min-w-[36px] min-h-[36px] flex items-center justify-center"
-              aria-label="Toggle Theme"
+              className="p-2 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 text-luxury-dark dark:text-luxury-light transition-colors"
+              aria-label="Toggle theme"
             >
-              {mounted ? (
-                theme === "light" ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />
+              {mounted && theme === "light" ? (
+                <Moon className="w-4 h-4" />
               ) : (
-                <div className="w-5 h-5" />
+                <Sun className="w-4 h-4 text-amber-400" />
               )}
             </button>
 
-            {/* Menu Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-full hover:bg-primary/5 dark:hover:bg-secondary/5 text-luxury-dark dark:text-luxury-light transition-colors"
-              aria-label="Open Menu"
+              className="p-2 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-luxury-dark dark:text-luxury-light"
+              aria-label="Open menu"
             >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
 
         {/* Mobile Navigation Drawer */}
-        <div
-          className={cn(
-            "fixed inset-0 top-[73px] z-40 bg-white dark:bg-luxury-dark shadow-2xl transition-all duration-500 lg:hidden overflow-y-auto px-6 py-8 flex flex-col justify-between",
-            isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0 pointer-events-none"
-          )}
-        >
-          <div className="flex flex-col space-y-6">
-            {navLinks.map((link) => {
-              const isActive = pathname === link.href;
+        {isOpen && (
+          <div className="fixed inset-0 top-[65px] z-50 bg-white dark:bg-luxury-dark shadow-2xl lg:hidden overflow-y-auto px-6 py-8 flex flex-col justify-between animate-in slide-in-from-top-4 duration-200">
+            <div className="space-y-6">
+              <div className="space-y-1">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href === "#" ? "/collections" : link.href}
+                    className={cn(
+                      "block px-3 py-2.5 rounded-xl text-sm font-semibold uppercase tracking-wider transition-colors",
+                      pathname === link.href
+                        ? "bg-secondary text-white"
+                        : "text-luxury-dark dark:text-luxury-light hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                    )}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
 
-              if (link.hasMega) {
-                return (
-                  <div key={link.name} className="flex flex-col space-y-2">
-                    <span className="text-xs font-bold tracking-widest uppercase text-luxury-dark/40 dark:text-luxury-light/40">
-                      Collections
-                    </span>
+              {/* Mobile Categories Links */}
+              <div className="pt-4 border-t border-neutral-200 dark:border-neutral-800">
+                <p className="px-3 text-[10px] font-bold uppercase tracking-wider text-neutral-400 mb-2">
+                  Product Categories
+                </p>
+                <div className="grid grid-cols-2 gap-2">
+                  {categoryList.map((cat) => (
                     <Link
-                      href="/collections"
-                      className="text-lg font-medium text-luxury-dark dark:text-luxury-light hover:text-secondary pl-2"
+                      key={cat.name}
+                      href={cat.href}
+                      className="p-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800/60 border border-neutral-200/60 dark:border-neutral-700/60 text-xs font-medium text-luxury-dark dark:text-neutral-200"
                     >
-                      View All Collections
+                      {cat.name}
                     </Link>
-                    <div className="grid grid-cols-1 gap-2 pl-4 border-l border-primary/25 mt-1">
-                      {COLLECTIONS.slice(0, 4).map((col) => (
-                        <Link
-                          key={col.id}
-                          href={`/collections?search=${encodeURIComponent(col.name)}`}
-                          className="text-sm text-luxury-dark/70 dark:text-luxury-light/70 hover:text-secondary"
-                        >
-                          {col.name}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                );
-              }
+                  ))}
+                </div>
+              </div>
+            </div>
 
-              if (link.hasSub) {
-                return (
-                  <div key={link.name} className="flex flex-col space-y-2">
-                    <span className="text-xs font-bold tracking-widest uppercase text-luxury-dark/40 dark:text-luxury-light/40">
-                      Product Categories
-                    </span>
-                    <div className="grid grid-cols-1 gap-2 pl-4 border-l border-primary/25 mt-1">
-                      {productCategories.map((sub) => (
-                        <Link
-                          key={sub.name}
-                          href={sub.href}
-                          className="text-base text-luxury-dark/70 dark:text-luxury-light/70 hover:text-secondary"
-                        >
-                          {sub.name}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                );
-              }
-
-              return (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className={cn(
-                    "text-xl font-medium tracking-wide uppercase transition-colors hover:text-secondary",
-                    isActive ? "text-secondary font-bold" : "text-luxury-dark dark:text-luxury-light"
-                  )}
-                >
-                  {link.name}
-                </Link>
-              );
-            })}
+            {/* Mobile Footer CTAs */}
+            <div className="pt-6 border-t border-neutral-200 dark:border-neutral-800 space-y-3 mt-8">
+              <a
+                href="tel:+919795872419"
+                className="flex items-center justify-center gap-2 py-2.5 text-xs font-semibold text-secondary hover:text-secondary-dark"
+              >
+                <Phone className="w-3.5 h-3.5" /> Call Specialist: +91 97958 72419
+              </a>
+              <Link
+                href="/contact?ref=catalogue"
+                className="block text-center py-3 bg-primary hover:bg-primary-dark text-white rounded-full text-xs font-semibold uppercase tracking-wider shadow-md"
+              >
+                Request Catalogue
+              </Link>
+            </div>
           </div>
-
-          <div className="mt-8 pt-8 border-t border-luxury-dark/10 dark:border-luxury-light/10 flex flex-col space-y-4">
-            <Link
-              href="tel:+919795872419"
-              className="flex items-center text-sm text-luxury-dark/70 dark:text-luxury-light/70 hover:text-secondary justify-center py-2"
-            >
-              <Phone className="w-4 h-4 mr-2 text-secondary" />
-              Call Specialist: +91 97958 72419
-            </Link>
-            <Link
-              href="/contact?ref=catalogue"
-              className="bg-primary hover:bg-primary-dark text-white text-center py-3 rounded-full text-xs font-semibold uppercase tracking-widest transition-colors w-full"
-            >
-              Request Catalogue
-            </Link>
-          </div>
-        </div>
+        )}
       </header>
     </>
   );

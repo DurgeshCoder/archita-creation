@@ -111,8 +111,8 @@ export default function CollectionsBrowser() {
   return (
     <div className="w-full">
       {/* Search and Filters panel */}
-      <div className="max-w-7xl mx-auto px-6 md:px-12 mb-12">
-        <div className="flex flex-col lg:flex-row gap-6 items-center justify-between bg-accent/20 dark:bg-luxury-dark/40 border border-luxury-dark/5 dark:border-white/5 p-6 rounded-3xl backdrop-blur-md">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 mb-12">
+        <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 items-center justify-between bg-accent/20 dark:bg-luxury-dark/40 border border-luxury-dark/5 dark:border-white/5 p-4 sm:p-6 rounded-3xl backdrop-blur-md">
           {/* Search Field */}
           <div className="relative w-full lg:w-96">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-luxury-dark/40 dark:text-white/40" />

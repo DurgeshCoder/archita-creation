@@ -88,11 +88,11 @@ export default function ProductCard({ product }: ProductCardProps) {
             {product.price}
           </span>
         </div>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-2 gap-2.5">
           {/* View Details */}
           <Link
-            href={`/products/${product.id}`}
-            className="bg-accent hover:bg-accent-dark dark:bg-white/5 dark:hover:bg-white/10 text-primary dark:text-white py-2.5 rounded-full text-[10px] font-semibold uppercase tracking-wider text-center flex items-center justify-center transition-all duration-300"
+            href={`/products/${productId}`}
+            className="bg-accent hover:bg-accent-dark dark:bg-white/5 dark:hover:bg-white/10 text-primary dark:text-white py-2.5 min-h-[40px] rounded-full text-[10px] font-semibold uppercase tracking-wider text-center flex items-center justify-center transition-all duration-300 active:scale-[0.97]"
           >
             Details
             <ArrowRight className="w-3 h-3 ml-1" />
@@ -103,9 +103,9 @@ export default function ProductCard({ product }: ProductCardProps) {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-[#25D366] hover:bg-[#20ba5a] text-white py-2.5 rounded-full text-[10px] font-semibold uppercase tracking-wider text-center flex items-center justify-center transition-all duration-300 shadow-sm"
+            className="bg-[#25D366] hover:bg-[#20ba5a] text-white py-2.5 min-h-[40px] rounded-full text-[10px] font-semibold uppercase tracking-wider text-center flex items-center justify-center transition-all duration-300 shadow-sm active:scale-[0.97]"
           >
-            <MessageSquare className="w-3 h-3 mr-1 fill-current" />
+            <MessageSquare className="w-3.5 h-3.5 mr-1 fill-current" />
             Enquire
           </Link>
         </div>

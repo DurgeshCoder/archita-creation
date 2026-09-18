@@ -96,6 +96,18 @@ export default function Navbar() {
     setIsOpen(false);
   }, [pathname]);
 
+  // Lock body scroll when mobile drawer is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
@@ -312,7 +324,7 @@ export default function Navbar() {
 
         {/* Mobile Navigation Drawer */}
         {isOpen && (
-          <div className="fixed inset-0 top-[65px] z-50 bg-white dark:bg-luxury-dark shadow-2xl lg:hidden overflow-y-auto px-6 py-8 flex flex-col justify-between animate-in slide-in-from-top-4 duration-200">
+          <div className="fixed inset-0 top-[60px] md:top-[65px] z-50 bg-white dark:bg-luxury-dark shadow-2xl lg:hidden overflow-y-auto px-5 sm:px-8 py-6 pb-24 flex flex-col justify-between animate-in slide-in-from-top-4 duration-200 h-[calc(100dvh-60px)] md:h-[calc(100dvh-65px)]">
             <div className="space-y-6">
               <div className="space-y-1">
                 {navLinks.map((link) => (
@@ -320,9 +332,9 @@ export default function Navbar() {
                     key={link.name}
                     href={link.href === "#" ? "/collections" : link.href}
                     className={cn(
-                      "block px-3 py-2.5 rounded-xl text-sm font-semibold uppercase tracking-wider transition-colors",
+                      "block px-4 py-3 rounded-xl text-sm font-semibold uppercase tracking-wider transition-colors min-h-[44px] flex items-center",
                       pathname === link.href
-                        ? "bg-secondary text-white"
+                        ? "bg-secondary text-white shadow-sm"
                         : "text-luxury-dark dark:text-luxury-light hover:bg-neutral-100 dark:hover:bg-neutral-800"
                     )}
                   >
@@ -333,7 +345,7 @@ export default function Navbar() {
 
               {/* Mobile Categories Links */}
               <div className="pt-4 border-t border-neutral-200 dark:border-neutral-800">
-                <p className="px-3 text-[10px] font-bold uppercase tracking-wider text-neutral-400 mb-2">
+                <p className="px-1 text-[10px] font-bold uppercase tracking-wider text-neutral-400 mb-2.5">
                   Product Categories
                 </p>
                 <div className="grid grid-cols-2 gap-2">
@@ -341,9 +353,9 @@ export default function Navbar() {
                     <Link
                       key={cat.name}
                       href={cat.href}
-                      className="p-2.5 rounded-xl bg-neutral-50 dark:bg-neutral-800/60 border border-neutral-200/60 dark:border-neutral-700/60 text-xs font-medium text-luxury-dark dark:text-neutral-200"
+                      className="p-3 rounded-xl bg-neutral-50 dark:bg-neutral-800/60 border border-neutral-200/60 dark:border-neutral-700/60 text-xs font-medium text-luxury-dark dark:text-neutral-200 hover:border-secondary/40 active:bg-secondary/10 transition-colors flex items-center min-h-[44px]"
                     >
-                      {cat.name}
+                      <span className="line-clamp-2">{cat.name}</span>
                     </Link>
                   ))}
                 </div>
@@ -351,16 +363,16 @@ export default function Navbar() {
             </div>
 
             {/* Mobile Footer CTAs */}
-            <div className="pt-6 border-t border-neutral-200 dark:border-neutral-800 space-y-3 mt-8">
+            <div className="pt-6 border-t border-neutral-200 dark:border-neutral-800 space-y-3 mt-6">
               <a
                 href="tel:+919795872419"
-                className="flex items-center justify-center gap-2 py-2.5 text-xs font-semibold text-secondary hover:text-secondary-dark"
+                className="flex items-center justify-center gap-2 py-3 text-xs font-semibold text-secondary hover:text-secondary-dark rounded-xl bg-secondary/10 min-h-[44px]"
               >
-                <Phone className="w-3.5 h-3.5" /> Call Specialist: +91 97958 72419
+                <Phone className="w-4 h-4" /> Call Specialist: +91 97958 72419
               </a>
               <Link
                 href="/contact?ref=catalogue"
-                className="block text-center py-3 bg-primary hover:bg-primary-dark text-white rounded-full text-xs font-semibold uppercase tracking-wider shadow-md"
+                className="block text-center py-3.5 bg-primary hover:bg-primary-dark text-white rounded-full text-xs font-semibold uppercase tracking-wider shadow-md min-h-[44px] flex items-center justify-center"
               >
                 Request Catalogue
               </Link>

@@ -163,12 +163,12 @@ export default async function ProductPage({ params }: PageProps) {
               </div>
 
               {/* Price Banner */}
-              <div className="bg-accent/20 dark:bg-luxury-dark/40 border border-luxury-dark/5 dark:border-white/5 p-6 rounded-3xl flex items-center justify-between">
+              <div className="bg-accent/20 dark:bg-luxury-dark/40 border border-luxury-dark/5 dark:border-white/5 p-5 sm:p-6 rounded-3xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div>
                   <span className="text-[10px] text-luxury-dark/40 dark:text-white/40 tracking-wider uppercase font-medium">
                     Enquiry Catalog Price
                   </span>
-                  <div className="text-3xl font-serif font-bold text-primary dark:text-secondary-light mt-0.5">
+                  <div className="text-2xl sm:text-3xl font-serif font-bold text-primary dark:text-secondary-light mt-0.5">
                     {product.price}
                   </div>
                 </div>
@@ -176,10 +176,10 @@ export default async function ProductPage({ params }: PageProps) {
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[#25D366] hover:bg-[#20ba5a] text-white px-6 py-3.5 rounded-full text-xs font-semibold uppercase tracking-widest flex items-center transition-all duration-300 shadow-md hover:scale-102"
+                  className="w-full sm:w-auto bg-[#25D366] hover:bg-[#20ba5a] text-white px-6 py-3.5 rounded-full text-xs font-semibold uppercase tracking-widest flex items-center justify-center transition-all duration-300 shadow-md hover:scale-102 min-h-[44px]"
                 >
-                  <MessageSquare className="w-4 h-4 mr-2 fill-current" />
-                  Order / Enquire
+                  <MessageSquare className="w-4 h-4 mr-2 fill-current shrink-0" />
+                  <span>Order / Enquire</span>
                 </Link>
               </div>
 

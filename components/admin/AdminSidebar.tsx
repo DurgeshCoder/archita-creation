@@ -52,7 +52,11 @@ const NAV_ITEMS = [
   },
 ];
 
-export default function AdminSidebar() {
+interface AdminSidebarProps {
+  onClose?: () => void;
+}
+
+export default function AdminSidebar({ onClose }: AdminSidebarProps = {}) {
   const pathname = usePathname();
   const router = useRouter();
   const [loggingOut, setLoggingOut] = useState(false);
@@ -70,8 +74,12 @@ export default function AdminSidebar() {
     }
   };
 
+  const handleLinkClick = () => {
+    if (onClose) onClose();
+  };
+
   return (
-    <aside className="w-64 bg-neutral-900 text-white flex flex-col h-screen border-r border-neutral-800 shrink-0 select-none z-40">
+    <aside className="w-64 bg-neutral-900 text-white flex flex-col h-full lg:h-screen border-r border-neutral-800 shrink-0 select-none z-40">
       {/* Brand Header */}
       <div className="p-6 border-b border-neutral-800 shrink-0">
         <Link href="/admin" className="flex items-center gap-3 group">
@@ -104,6 +112,7 @@ export default function AdminSidebar() {
             <Link
               key={item.href}
               href={item.href}
+              onClick={handleLinkClick}
               className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all ${
                 isActive
                   ? "bg-secondary text-white shadow-md shadow-secondary/30 font-semibold"

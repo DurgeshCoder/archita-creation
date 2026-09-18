@@ -18,10 +18,13 @@ export default function TrustedBy() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 items-center">
           {partners.map((partner, i) => {
             const Icon = partner.icon;
+            const isLastOnMobile = i === 4;
             return (
               <div
                 key={i}
-                className="p-4 rounded-2xl bg-white dark:bg-neutral-800/60 border border-neutral-200/60 dark:border-neutral-700/60 flex flex-col items-center text-center group hover:border-secondary/40 transition-all hover:shadow-xs"
+                className={`p-4 rounded-2xl bg-white dark:bg-neutral-800/60 border border-neutral-200/60 dark:border-neutral-700/60 flex flex-col items-center text-center group hover:border-secondary/40 transition-all hover:shadow-xs ${
+                  isLastOnMobile ? "col-span-2 md:col-span-1" : ""
+                }`}
               >
                 <div className="w-8 h-8 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary mb-2 group-hover:scale-110 transition-transform">
                   <Icon className="w-4 h-4" />

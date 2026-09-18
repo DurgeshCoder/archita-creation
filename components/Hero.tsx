@@ -73,25 +73,25 @@ export default function Hero() {
 
           <motion.h1
             variants={itemVariants}
-            className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-[64px] font-bold tracking-tight leading-[1.12] text-white"
+            className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[60px] font-bold tracking-tight leading-[1.14] text-white"
           >
-            Heirloom Bedding, <br />
+            Heirloom Bedding, <br className="hidden sm:inline" />
             <span className="text-secondary font-normal italic font-serif">Woven for Timeless</span> Rest.
           </motion.h1>
 
           <motion.p
             variants={itemVariants}
-            className="font-sans text-sm sm:text-base md:text-lg text-white/85 max-w-xl font-light leading-relaxed"
+            className="font-sans text-xs sm:text-sm md:text-base text-white/85 max-w-xl font-light leading-relaxed"
           >
             Crafted with 100% Giza cotton, Italian-embroidered percales, handcrafted block-print mulmul dohars, and cloud-soft microfiber comforters. Designed to bring world-class boutique hotel luxury home.
           </motion.p>
 
-          <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-4 pt-2">
+          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
             <Link
               href="/collections"
-              className="bg-secondary hover:bg-secondary-dark text-white px-7 py-3.5 rounded-full text-xs font-semibold uppercase tracking-widest transition-all duration-300 shadow-lg shadow-secondary/25 hover:scale-[1.02] active:scale-[0.98] flex items-center group"
+              className="bg-secondary hover:bg-secondary-dark text-white px-7 py-3.5 rounded-full text-xs font-semibold uppercase tracking-widest transition-all duration-300 shadow-lg shadow-secondary/25 hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center group text-center min-h-[44px]"
             >
-              Explore Collections
+              <span>Explore Collections</span>
               <ArrowRight className="w-3.5 h-3.5 ml-2 transition-transform group-hover:translate-x-1" />
             </Link>
 
@@ -99,9 +99,9 @@ export default function Hero() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-6 py-3.5 rounded-full text-xs font-semibold uppercase tracking-widest backdrop-blur-sm transition-all flex items-center gap-2"
+              className="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-6 py-3.5 rounded-full text-xs font-semibold uppercase tracking-widest backdrop-blur-sm transition-all flex items-center justify-center gap-2 min-h-[44px] text-center"
             >
-              <MessageSquare className="w-4 h-4 text-emerald-400 fill-emerald-400" />
+              <MessageSquare className="w-4 h-4 text-emerald-400 fill-emerald-400 shrink-0" />
               <span>Direct WhatsApp Inquiry</span>
             </Link>
           </motion.div>
